@@ -17,7 +17,8 @@ Haverão três ou mais personagens - alguns desbloqueáveis -, itens, side-kicks
 
 ### Modelo
 
-* Modelo de Entidade e Relacionamento feito, dentro da pasta modelo, onde descreve o esqueleto do projeto.
+* Modelo de Entidade e Relacionamento feito, dentro da pasta modelo, onde descreve o esqueleto do projeto. Um possui os atributos, outro as relações.
+* Diagrama de Atividades feito, também dentro da pasta modelo.
 
 ### Programas e/ou Ferramentas utilizadas até o momento
 

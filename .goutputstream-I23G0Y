@@ -1,0 +1,123 @@
+Type _Antonstypewriter
+
+		//This is the entered text.
+		input as string
+		//This is the ID number of our text object
+		output as integer
+		//This is the length of our entered text
+		length as integer
+		//This is the current position of our text
+		pos as integer
+		//This is the mode of our function, 0 sets everything up, 1 types it out
+		flag as integer
+		//This keeps keeps loops out of our function, by substituting timer based delays instead
+		time as float
+		//This provides some extra diagnostic information
+		diagnostic as integer
+		//This is the sound file for our key sound
+		key as integer
+		//This is the sound file for our space bar sound
+		space as integer
+
+EndType
+	
+function begin_game ()
+	//Some simple data keeping
+	
+
+	//We begin by setting tfx (typewriter FX)
+	Global tfx as _Antonstypewriter
+	//We set the time extension to the current timer() value
+	tfx.time = timer()
+	//We create our Text object output
+	tfx.output = CreateText( "" )
+	//We limit the amount of text that can appear across the screen so that it wraps
+	SetTextMaxWidth( tfx.output, 100 )
+
+	//This enables and disables extra diagnostic info
+	tfx.diagnostic = 1
+	//This loads our sounds
+	tfx.key = LoadSound( "type.wav" )
+	tfx.space = LoadSound( "space.wav" )
+
+	//This just adds a sprite, which is designed to demonstrate that the program
+	//can type and perform other operations at the same time.
+	Sprite = CreateSprite( 0 )
+	SetSpriteSize( Sprite, 25, 25 )
+	SetSpriteOffset( Sprite, 12.5, 12.5 )
+	SetSpritePositionByOffset( Sprite, 50, 50 )
+	SetSpriteColor( Sprite, 0, 255, 128, 255 )
+
+	//***************** Main program loop *****************
+
+	Repeat
+
+		//Here we use the Antonstypewriter function
+		tfx = Antonstypewriter( tfx, "ONCE UPON A TIME THERE WAS A TOWN THAT LIVED UNDER A WOOD. The wood was deep and dark and thick. The kind of wood little boys and girls are scared to enter, especially when it started to get dark. For after it started to get dark strange things would rustle the bushes, and flap in the trees far above, or scamper across the ground so fast you could only barely glance the end of it’s tail.", 33, 450 )
+		//This just rotates the sprite for us.
+		SetSpriteAngle( Sprite, GetSpriteAngle( Sprite ) + 1 )
+
+	sync()
+	Until GetRawKeyState( 27 ) = 1
+	End
+
+endfunction
+//This is a heavily modified version of Paronamixxe's Antonstypewriter function.
+//The original used an effective and simple loop system. The problem with this
+//is that it didn't allow for anything else in the program to happen.
+//
+//Parameters: Antonstypewriter global, text to input, min delay and max delay type speed.
+Function Antonstypewriter ( temp as _Antonstypewriter, input$, min, max )
+
+    //We begin by selecting the flag
+    Select temp.flag
+        //Case 0 sets up all the data, it gets the length of the string
+        //Sets the flag to 1 so the next case will trigger
+        //Passes our parameter text into our object text
+        Case 0
+            temp.length = len ( input$ )
+            temp.flag = 1
+            temp.input = input$
+        EndCase
+
+        //Case 0 is where all the magic happens.
+        Case 1
+
+            //We begin by testing to see if the set time is less than the current timer()
+            //If the current timer is greater than time has run out.
+            //We also test if our position exceeds our string length, if it does then the typing is finished.
+            If temp.time < timer() and temp.pos < temp.length
+                //This tracks the position of our automatic typing
+                temp.pos = temp.pos + 1
+                //This sets the string in our text object using left to isolate our current text.
+                SetTextString( temp.output, left( temp.input, temp.pos ))
+                //This block of code just converts random numbers into floats
+                tmp = random( min, max )
+                tmp# = tmp
+                tmp# = tmp# / 1000
+                //We add the random float to our time value this adjusts the typing speed
+                temp.time = timer() + tmp#
+                //This block tests to see if the last character was a space, if it was
+                //we play the spacebar sound otherwise it's just a normal keypress.
+                If mid( temp.input, temp.pos, 1 ) = " "
+                    PlaySound( temp.space )
+                Else
+                    PlaySound( temp.key )
+                EndIf
+            EndIf
+
+        EndCase
+
+    EndSelect
+
+    // This is just some diagnostic data I needed while bugfixing my code.
+    If temp.diagnostic = 1
+        print( temp.pos )
+        print( temp.length )
+        print( timer() )
+        print( temp.time )
+        print( temp.input )
+        print( temp.flag )
+    EndIf
+
+endfunction temp

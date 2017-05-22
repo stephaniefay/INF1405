@@ -1,0 +1,92 @@
+
+Type _Antonstypewriter
+
+		//This is the entered text.
+		input as string
+		//This is the ID number of our text object
+		output as integer
+		//This is the length of our entered text
+		length as integer
+		//This is the current position of our text
+		pos as integer
+		//This is the mode of our function, 0 sets everything up, 1 types it out
+		flag as integer
+		//This keeps keeps loops out of our function, by substituting timer based delays instead
+		time as float
+		//This provides some extra diagnostic information
+		diagnostic as integer
+		//This is the sound file for our key sound
+		key as integer
+		//This is the sound file for our space bar sound
+		space as integer
+
+EndType
+	
+function begin_game ()
+	sleep (400)
+	
+	tfx as _Antonstypewriter
+	teste as _Antonstypewriter
+	
+	tfx.time = timer()
+	teste.time = timer()
+	
+	tfx.output = CreateText( "" )
+	teste.output = CreateText ( "" )
+	
+	SetTextMaxWidth( tfx.output, 1004 )
+	SetClearColor(0,0,0)
+
+	tfx.key = LoadSound( "type.wav" )
+	teste.key = LoadSound( "type.wav" )
+	
+	
+	do
+		SELECT flag
+			CASE 0
+				print("case0")
+				tfx = Antonstypewriter( tfx, "Há muito, muito, tempo atrás existiu um reino. Reino esse de criaturinhas tão pequenas - e tão... Incomuns - que muitos humanos simplesmente os viam como pequenos insetos. Ou, mesmo, mitos inacreditáveis.", 1, 45 )
+				
+			ENDCASE
+			CASE 1
+				print("case1")
+				teste = Antonstypewriter(teste, "teste pra ver se rola fazer o que eu to querendo", 1, 45)
+			ENDCASE
+		ENDSELECT
+		
+			
+		Sync()
+	loop
+
+endfunction
+
+
+Function Antonstypewriter ( temp as _Antonstypewriter, input$, min, max )
+    Select temp.flag
+        
+        Case 0
+            temp.length = len ( input$ )
+            temp.flag = 1
+            temp.input = input$
+        EndCase
+ 
+        Case 1
+           If temp.time < timer() and temp.pos < temp.length
+                temp.pos = temp.pos + 1
+                SetTextString( temp.output, left( temp.input, temp.pos ))
+                SetTextSize(temp.output, 50)
+                SetTextPosition(temp.output, 20, 200)
+                tmp = random( min, max )
+                tmp# = tmp
+                tmp# = tmp# / 1000
+                temp.time = timer() + tmp#
+                If NOT mid( temp.input, temp.pos, 1 ) = " "
+                    PlaySound( temp.key )
+                EndIf
+            EndIf
+
+        EndCase
+
+    EndSelect
+
+endfunction temp

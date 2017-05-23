@@ -40,15 +40,19 @@ dynamic_memory=0
 output_path=
 
 [projectfiles]
-FILE_0=..%2Finf1405%2Fsrc%2FtypesDefinitions.agc;-1
-FILE_1=..%2Finf1405%2Fsrc%2Fability.agc;-1
-FILE_2=..%2Finf1405%2Fsrc%2FbeginHandler.agc;-1
-FILE_3=..%2Finf1405%2Fsrc%2Fcharacter.agc;-1
-FILE_4=..%2Finf1405%2Fmain.agc;-1
-FILE_5=..%2Finf1405%2Fsrc%2FstarterModule.agc;-1
+FILE_0=src%2FtypesDefinitions.agc;-1
+FILE_1=src%2Fability.agc;-1
+FILE_2=src%2FbeginHandler.agc;-1
+FILE_3=src%2Fcharacter.agc;-1
+FILE_4=main.agc;-1
+FILE_5=src%2FstarterModule.agc;-1
+FILE_6=src%2Fevent.agc;-1
 
 [files]
-FILE_NAME_0=1;..%2Finf1405%2Fmain.agc;10;0
+FILE_NAME_0=0;src%2FtypesDefinitions.agc;44;0
+FILE_NAME_1=0;src%2Fability.agc;0;2
+FILE_NAME_2=0;src%2Fcharacter.agc;0;1
+FILE_NAME_3=1;src%2Fevent.agc;0;3
 
 [project]
 description=

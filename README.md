@@ -1,4 +1,4 @@
-# INF1405 - Construção de Sistemas
+﻿# INF1405 - Construção de Sistemas
 ## Professor: Edmundo Torreão
 
 A proposta da matéria é montar um projeto a sua escolha e implementá-lo.
@@ -32,6 +32,18 @@ Os arquivos foram achados na internet com a ajuda do Google, nenhuma das imagens
 Todos os arquivos referentes à sons, imagens, fontes e saves do jogo ficarão nessa pasta. Há imagens que não estão sendo utilizadas dentro das pastas porque em versões anteriores eu havia decidido colocá-las e eventualmente mudei de ideia. Contudo permaneceram na pasta do projeto porque não sei se vou voltar a utilizá-las.
 
 A pasta "saves" serve apenas para o propósito de salvar e recarregar informações do jogo. Ainda não está implementado, contudo. 
+
+### Arquivos na pasta "src"
+
+beginHandler.agc - Responsável por carregar a janela inicial (pós menu), com o efeito da máquina de escrever. Ele carrega o starterModule.
+
+starterModule.agc - Futuramente será o responsável por ler as informações necessárias do arquivo e inicializar as estruturas.
+
+typesDefinitions.agc - Arquivo contendo todas as estruturas de dados do jogo.
+
+character.agc - Funções referentes ao personagem.
+
+ability.agc - Funções referentes às habilidades.
 
 ### Programas e/ou Ferramentas utilizadas até o momento
 

@@ -31,7 +31,7 @@ Os arquivos foram achados na internet com a ajuda do Google, nenhuma das imagens
 
 Todos os arquivos referentes à sons, imagens, fontes e saves do jogo ficarão nessa pasta. Há imagens que não estão sendo utilizadas dentro das pastas porque em versões anteriores eu havia decidido colocá-las e eventualmente mudei de ideia. Contudo permaneceram na pasta do projeto porque não sei se vou voltar a utilizá-las.
 
-A pasta "saves" serve apenas para o propósito de salvar e recarregar informações do jogo. Ainda não está implementado, contudo.
+A pasta "saves" serve apenas para o propósito de salvar e recarregar informações do jogo. Ainda não está implementado, contudo. 
 
 ### Programas e/ou Ferramentas utilizadas até o momento
 

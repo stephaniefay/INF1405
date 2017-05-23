@@ -1,6 +1,6 @@
 #include "src/character.agc"
 #include "src/ability.agc"
-
+#include "src/event.agc"
 
 Type playerStatus
 	
@@ -51,6 +51,8 @@ Type eventStatus
 	options as String[]
 	
 	enemyHolder as enemyStatus[]
+	
+	index as integer
 	
 endType
 

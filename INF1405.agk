@@ -49,10 +49,11 @@ FILE_5=src%2FstarterModule.agc;-1
 FILE_6=src%2Fevent.agc;-1
 
 [files]
-FILE_NAME_0=0;src%2FtypesDefinitions.agc;44;0
+FILE_NAME_0=0;src%2FtypesDefinitions.agc;80;0
 FILE_NAME_1=0;src%2Fability.agc;0;2
 FILE_NAME_2=0;src%2Fcharacter.agc;0;1
-FILE_NAME_3=1;src%2Fevent.agc;0;3
+FILE_NAME_3=0;src%2FstarterModule.agc;67;4
+FILE_NAME_4=1;src%2Fevent.agc;784;3
 
 [project]
 description=

@@ -181,6 +181,7 @@ AddSpriteAnimationFrame ( spriteStarExit, LoadImageResized("startMenu\star\star_
 AddSpriteAnimationFrame ( spriteStarExit, LoadImageResized("startMenu\star\star_right (3).gif", 0.3, 0.3, 0) )
 AddSpriteAnimationFrame ( spriteStarExit, LoadImageResized("startMenu\star\star_right (4).gif", 0.3, 0.3, 0) )
 
+wat as integer
 
 //flag = 0
 
@@ -245,7 +246,6 @@ do
 		endif
 
 	endif
-
 
 	Sync()
 loop

@@ -1,11 +1,13 @@
 #include "src/typesDefinitions.agc"
 
+aux as itemStatus[]
+
 function start () 
-	
 	do
+		
+		createEvent("False", aux, "Teste", 
 		
 		print( getTotalEvents() )
 		Sync()
-
 	loop
 endfunction

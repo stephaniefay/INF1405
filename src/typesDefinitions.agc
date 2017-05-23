@@ -1,3 +1,7 @@
+#include "src/character.agc"
+#include "src/ability.agc"
+
+
 Type playerStatus
 	
 	absoluteHP as integer

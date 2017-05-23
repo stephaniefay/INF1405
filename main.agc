@@ -1,4 +1,4 @@
-#include "beginHandler.agc"
+#include "src/beginHandler.agc"
 
 // show all errors
 SetErrorMode(2)

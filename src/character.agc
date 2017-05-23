@@ -1,5 +1,3 @@
-#include "typesDefinitions.agc"
-
 global player as playerStatus
 
 //Declare player
@@ -21,15 +19,15 @@ endfunction player
 
 //Functions to get info of player
 
-function getName()
+function getNameCharacter ()
 	
 endfunction player.name
 
-function getDesc ()
+function getDescCharacter ()
 	
 endfunction player.desc
 
-function damageCaused (dfs as integer) //deffense of the enemy who's taking the damage
+function damageCausedCharacter (dfs as integer) //deffense of the enemy who's taking the damage
 	
 endfunction (player.attackValue.damage * player.modifier) - dfs
 
@@ -59,23 +57,23 @@ function updateCharacterModifier (newModifier as integer)
 	
 endfunction
 
-function updateAbility (newAbility as abilityStatus)
+function updateCharacterAbility (newAbility as abilityStatus)
 	
 	for i = 0 to player.abilityList.length
-		if newAbility.name = player.abilityList[i].name
+		if getNameAbility(newAbility) = player.abilityList[i].name
 			return
 		endif
 	next i
 	
-	updateCharacterAttack(newAbility.attack)
-	updateCharacterDeffense(newAbility.deffense)
-	updateCharacterHP(newAbility.hp)
+	updateCharacterAttack(getAttackAbility(newAbility))
+	updateCharacterDeffense(getDeffenseAbility(newAbility))
+	updateCharacterHP(getHPAbility(newAbility))
 	player.abilityList.insert(newAbility)
 
 endfunction
 
 
-function updateItem (newItem as itemStatus)
+function updateCharacterItem (newItem as itemStatus)
 
 	for i = 0 to player.itemList.length
 		if newItem.name = player.itemList[i].name

@@ -1,4 +1,4 @@
-#include "character.agc"
+#include "src/typesDefinitions.agc"
 
 function start () 
 	do

@@ -1,5 +1,5 @@
 global eventLst as eventStatus[]
-global lastIndex as integer
+global lastIndexEvent as integer
 
 function createEvent (hasItem as String, itemList as itemStatus[], desc as String, options as String[], enemyHolder as enemyStatus[])
 	
@@ -10,9 +10,9 @@ function createEvent (hasItem as String, itemList as itemStatus[], desc as Strin
 	newEvent.desc = desc
 	newEvent.options = options
 	newEvent.enemyHolder = enemyHolder
-	newEvent.index = lastIndex
+	newEvent.index = lastIndexEvent
 	
-	lastIndex = lastIndex+1
+	lastIndexEvent = lastIndexEvent+1
 	
 	eventLst.insert(newEvent)
 	
@@ -28,4 +28,4 @@ function getEventOptions (index as integer)
 endfunction eventLst[index].options
 
 function getTotalEvents ()
-endfunction lastIndex
+endfunction lastIndexEvent

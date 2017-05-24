@@ -4,39 +4,76 @@ global player as playerStatus
 
 function createPlayerInUse (hp as integer, itemLst as itemStatus[], abilityLst as abilityStatus[], name as String, desc as String, modifier as integer, deffense as integer, attackSts as attackStatus)
 
-	player.abilityList = abilityLst
 	player.absoluteHP = hp
 	player.remainingHP = hp
 	player.attackValue = attackSts
 	player.deffense = deffense
 	player.desc = desc
-	player.itemList = itemLst
 	player.modifier = modifier
 	player.name = name
+
+	for i = 0 to abilityLst.length
+		updateCharacterAbility(abilityLst[i])
+	next i
+	
+	for j = 0 to itemLst.length
+		updateCharacterItem(itemLst[i])
+	next j
 	
 endfunction player
+
+function createPlayer (absoluteHP as integer, itemList as itemStatus[], abilityList as abilityStatus[], name as String, desc as String, attackValue as attackStatus, modifier as integer, deffense as integer)
+	
+	newCharacter as playerStatus
+
+	newCharacter.absoluteHP = hp
+	newCharacter.remainingHP = hp
+	newCharacter.attackValue = attackStatus
+	newCharacter.deffense = deffense
+	newCharacter.desc = desc
+	newCharacter.modifier = modifier
+	newCharacter.name = name
+	newCharacter.abilityList = abilityList
+	newCharacter.itemList = itemList
+
+	for i = 0 to abilityList.length
+		newCharacter.absoluteHP = newCharacter.absoluteHP + getAbilityHP(abilityList[i])
+		newCharacter.remainingHP = newCharacter.remainingHP + getAbilityHP(abilityList[i])
+		newCharacter.deffense = newCharacter.deffense + getAbilityDeffense(abilityList[i])
+		newCharacter.modifier = newCharacter.modifier + getAbilityModifier(abilityList[i])
+		newAttack as attackStatus
+		newAttack = createAttack(getAttackDamage(newCharacter.attackValue) + getAbilityAttack(ability), getAttackName(newCharacter.attackValue))
+		newCharacter.attackValue = newAttack
+	next i
+	
+	for j = 0 to itemList.length
+		newCharacter.remainingHP = newCharacter.remainingHP + getItemDamage(itemList[i])
+	next j
+
+endfunction newCharacter
 
 
 //Functions to get info of player
 
-function getNameCharacter ()
+function getCharacterName ()
 	
 endfunction player.name
 
-function getDescCharacter ()
+function getCharacterDesc ()
 	
 endfunction player.desc
 
-function damageCausedCharacter (dfs as integer) //deffense of the enemy who's taking the damage
+function getCharacterDamageDealt ()
 	
-endfunction (player.attackValue.damage * player.modifier) - dfs
+endfunction (player.attackValue.damage * player.modifier)
 
 //update info 
 
 function updateCharacterHP (newHP as integer)
 	
+	player.absoluteHP = player.absoluteHP + newHP
 	player.remainingHP = player.remainingHP + newHP
-		
+	
 endfunction
 
 function updateCharacterDeffense (newDeffense as integer)
@@ -45,9 +82,11 @@ function updateCharacterDeffense (newDeffense as integer)
 
 endfunction
 
-function updateCharacterAttack (newAttack as integer)
+function updateCharacterAttack (attackValue as integer)
 	
-	player.attackValue.damage = player.attackValue.damage + newAttack
+	newAttack as attackStatus
+	newAttack = createAttack(getAttackDamage(player.attackValue) + attackValue, getAttackName(player.attackValue))
+	player.attackValue = newAttack
 
 endfunction
 
@@ -60,14 +99,15 @@ endfunction
 function updateCharacterAbility (newAbility as abilityStatus)
 	
 	for i = 0 to player.abilityList.length
-		if getNameAbility(newAbility) = player.abilityList[i].name
+		if getAbilityName(newAbility) = player.abilityList[i].name
 			return
 		endif
 	next i
 	
-	updateCharacterAttack(getAttackAbility(newAbility))
-	updateCharacterDeffense(getDeffenseAbility(newAbility))
-	updateCharacterHP(getHPAbility(newAbility))
+	updateCharacterAttack(getAbilityAttack(newAbility))
+	updateCharacterModifier(getAbilityModifier(newAbility))
+	updateCharacterDeffense(getAbilityDeffense(newAbility))
+	updateCharacterHP(getAbilityHP(newAbility))
 	player.abilityList.insert(newAbility)
 
 endfunction

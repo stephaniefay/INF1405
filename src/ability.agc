@@ -11,20 +11,20 @@ function createAbility (name as String, hp as integer, deffense as integer, atta
 	
 endfunction ability
 
-function getNameAbility (ability as abilityStatus)
+function getAbilityName (ability as abilityStatus)
 endfunction ability.name
 
-function getAttackAbility (ability as abilityStatus)
+function getAbilityAttack (ability as abilityStatus)
 endfunction ability.attack
 
-function getDeffenseAbility (ability as abilityStatus)
+function getAbilityDeffense (ability as abilityStatus)
 endfunction ability.deffense
 
-function getDescAbility (ability as abilityStatus)
+function getbilityDesc (ability as abilityStatus)
 endfunction ability.desc
 
-function getHPAbility (ability as abilityStatus)
+function getAbilityHP (ability as abilityStatus)
 endfunction ability.hp
 
-function getModifierAbility (ability as abilityStatus)
+function getAbilityModifier (ability as abilityStatus)
 endfunction ability.modifier

@@ -1,0 +1,67 @@
+global lastIndexEnemy as integer
+global enemyLst as enemyStatus[]
+
+function createEnemy (typeScene as integer[], absoluteHP as integer, modifier as integer, eventHolder as eventStatus[], name as String, desc as String[], attacksDesc as attackStatus[], talksList as String[], deffense as integer)
+	newEnemy as enemyStatus
+	
+	newEnemy.absoluteHP = absolueHP
+	newEnemy.attacksDesc = attacksDesc
+	newEnemy.deffense = deffense
+	newEnemy.desc = desc
+	newEnemy.eventHolder = eventHolder
+	newEnemy.modifier = modifier
+	newEnemy.name = name
+	newEnemy.remainingHP = absoluteHP
+	newEnemy.talksList = talksList
+	newEnemy.typeScene = typeScene
+	
+	newEnemy.index = lastIndexEnemy
+	lastIndexEnemy = lastIndexEnemy + 1
+	
+	enemyLst.insert(newEnemy)
+
+endfunction
+
+function getNameEnemy (index as integer)
+endfunction enemyLst[index].name
+
+function getHPEnemy (index as integer)
+endfunction enemyLst[index].remainingHP
+
+function getAttacksEnemy (index as integer)
+endfunction enemyLst[index].attacksDesc
+
+function getDeffenseEnemy (index as integer)
+endfunction enemyLst[index].deffense
+
+function getDescEnemy (index as integer)
+endfunction enemyLst[index].desc
+
+function getEventsEnemy (index as integer)
+endfunction enemyLst[index].eventHolder
+
+function getModifierEnemy (index as integer)
+endfunction enemyLst[index].modifier
+
+function getTalksEnemy (index as integer)
+endfunction enemyLst[index].talksList
+
+function getTalkEnemy (index as integer)
+	
+	newIndex = Random(0, enemyLst[index].talksList.length-1)
+
+endfunction enemyLst[index].talksList[newIndex]
+
+function getMonstersFromScene (index as integer)
+	
+	newLst as integer[]
+	
+	for i = 0 to enemyLst.length
+		for j = 0 to enemyLst[i].typeScene.length
+			if enemyLst[i].typeScene[j] = index
+				newLst.insert(enemyLst[i].index)
+			endif
+		next j
+	next i
+	
+endfunction newLst

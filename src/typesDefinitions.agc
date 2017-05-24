@@ -1,6 +1,9 @@
 #include "src/character.agc"
 #include "src/ability.agc"
 #include "src/event.agc"
+#include "src/item.agc"
+#include "src/enemy.agc"
+#include "src/attacks.agc"
 
 Type playerStatus
 	
@@ -68,6 +71,8 @@ Type itemStatus
 	
 	eventHolder as eventStatus[]
 	
+	index as integer
+	
 endType
 
 Type enemyStatus
@@ -92,12 +97,14 @@ Type enemyStatus
 	
 	deffense as integer
 	
+	index as integer
+	
 endType
 
 Type attackStatus
 	
 	damage as integer
 	
-	ignoresDeffense as String
+	name as String
 	
 endType

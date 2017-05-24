@@ -10,7 +10,7 @@ A proposta da matéria é montar um projeto a sua escolha e implementá-lo.
  * [ Programas Utilizados ](https://github.com/stephaniefay/inf1405#programas-eou-ferramentas-utilizadas-at%C3%A9-o-momento)
  * [ Arquivos da Pasta "media" ](https://github.com/stephaniefay/inf1405#arquivos-na-pasta-media)
  * [ Arquivos da Pasta "src" ](https://github.com/stephaniefay/inf1405#arquivos-na-pasta-src)
- * [ Save, Load & Pre-Load ]()
+ * [ Save, Load & Pre-Load ](https://github.com/stephaniefay/inf1405#save-load--pre-load)
 
 ### O Projeto
 
@@ -65,7 +65,7 @@ Loading: dentro de media/saves ele vai ler o arquivo mais recente e carregar as 
 
 Pre-Loading: dentro da pasta media/infoGame tem um único arquivo chamado info.txt, deste ele vai carregar todas as configurações iniciais do jogo como itens, eventos, personagens disponíveis, inimigos e habilidades. Para acrescentar novos é necessário que entenda a estrutura do arquivo e altere o txt da maneira correta.
 
-'''
+```
 
 Characters
 quantidade de personagens que você tem em sua lista
@@ -86,7 +86,7 @@ nome do ataque do seu personagem
 valor do modificador do seu personagem
 valor da defesa do seu personagem
 
-'''
+```
 
 (esse guia vai ser atualizado conforme for feito o código da leitura dos outros tópicos).
 

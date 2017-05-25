@@ -1,7 +1,7 @@
 global eventLst as eventStatus[]
 global lastIndexEvent as integer
 
-function createEvent (hasItem as String, itemQtd as integer, itemList as itemStatus[], desc as String, options as String[], enemyQtd as integer, enemyHolder as enemyStatus[])
+function createEvent (hasItem as String, itemQtd as integer, itemList as itemStatus[], desc as String, options as String[], enemyQtd as integer, enemyHolder as enemyStatus[], canAppearScene as integer[])
 	
 	newEvent as eventStatus
 	
@@ -12,6 +12,7 @@ function createEvent (hasItem as String, itemQtd as integer, itemList as itemSta
 	newEvent.options = options
 	newEvent.enemyQtd = enemyQtd
 	newEvent.enemyHolder = enemyHolder
+	newEvent.canAppearScene = canAppearScene
 	newEvent.index = lastIndexEvent
 	
 	lastIndexEvent = lastIndexEvent+1

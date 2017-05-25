@@ -84,6 +84,10 @@ Events
 	(...)
 	opção (string) (n)
 	Quantidade de inimigos (integer) (-1 não tem inimigos)
+	Quantidade de cenas o evento pode aparecer (integer) (-1 não aparece em cenas)
+	Index da cena (1) (integer)
+	(...)
+	Index da cena (n) (integer)
 Items
 	Quantidade de itens do arquivo (integer)
 	Nome do item (string)

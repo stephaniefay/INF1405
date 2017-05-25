@@ -61,6 +61,8 @@ Type eventStatus
 	
 	enemyHolder as enemyStatus[]
 	
+	canAppearScene as integer[]
+	
 	index as integer
 	
 endType

@@ -120,6 +120,8 @@ function getInfo ()
 				options as String[]
 				qtdEnemy as integer
 				enemyHolder as enemyStatus[]
+				canAppearScene as integer[]
+				
 				
 				hasItem = ReadLine(file)
 				qtdItem = Val(ReadLine(file))
@@ -130,8 +132,11 @@ function getInfo ()
 				next k
 				
 				qtdEnemy = Val(ReadLine(file))
+				for k = 0 to Val(ReadLine(file))-1
+					canAppearScene.insert(Val(ReadLine(file)))
+				next k
 				
-				createEvent(hasItem, qtdItem, itemListEvent, desc, options, qtdEnemy, enemyHolder)
+				createEvent(hasItem, qtdItem, itemListEvent, desc, options, qtdEnemy, enemyHolder, canAppearScene)
 				
 			next j
 			

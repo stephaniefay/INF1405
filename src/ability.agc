@@ -1,3 +1,6 @@
+global lastIndexAbility as integer
+global abilityLst as abilityStatus[]
+
 function createAbility (name as String, hp as integer, deffense as integer, attack as integer, modifier as integer, desc as String)
 
 	ability as abilityStatus
@@ -8,6 +11,11 @@ function createAbility (name as String, hp as integer, deffense as integer, atta
 	ability.desc = desc
 	ability.hp = hp
 	ability.modifier = modifier
+	
+	ability.index = lastIndexAbility
+	lastIndexAbility = lastIndexAbility + 1
+	
+	abilityLst.insert(ability)
 	
 endfunction ability
 
@@ -28,3 +36,9 @@ endfunction ability.hp
 
 function getAbilityModifier (ability as abilityStatus)
 endfunction ability.modifier
+
+function getAbility (index as integer)
+endfunction abilityLst[index]
+
+function getAllAbilities()
+endfunction abilityLst

@@ -36,3 +36,9 @@ endfunction itemLst[index].eventHolder
 function getRandomItem ()
 	index = Random(0, lastIndexItem-1)
 endfunction index
+
+function getItem (index as integer)
+endfunction itemLst[index]
+
+function getAllItems ()
+endfunction itemLst

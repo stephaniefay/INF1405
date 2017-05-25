@@ -1,17 +1,9 @@
+Abilities
+
+Events
+
+Items
+
+Enemies
+
 Characters
-1
-13
-Perfuminho Cheiroso
-Mordidinha no Cangote
-0
-1
-0
-Com essa habilidade você tem mais chance de morder um cangote
-0
-Um belo perfume
-Dragoblah
-Oh-ho
-2
-Mordida Estrelar
-1
-10

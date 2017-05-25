@@ -26,9 +26,9 @@ function createPlayer (absoluteHP as integer, itemList as itemStatus[], abilityL
 	
 	newCharacter as playerStatus
 
-	newCharacter.absoluteHP = hp
-	newCharacter.remainingHP = hp
-	newCharacter.attackValue = attackStatus
+	newCharacter.absoluteHP = absoluteHP
+	newCharacter.remainingHP = absoluteHP
+	newCharacter.attackValue = attackValue
 	newCharacter.deffense = deffense
 	newCharacter.desc = desc
 	newCharacter.modifier = modifier
@@ -42,12 +42,12 @@ function createPlayer (absoluteHP as integer, itemList as itemStatus[], abilityL
 		newCharacter.deffense = newCharacter.deffense + getAbilityDeffense(abilityList[i])
 		newCharacter.modifier = newCharacter.modifier + getAbilityModifier(abilityList[i])
 		newAttack as attackStatus
-		newAttack = createAttack(getAttackDamage(newCharacter.attackValue) + getAbilityAttack(ability), getAttackName(newCharacter.attackValue))
+		newAttack = createAttack(getAttackDamage(newCharacter.attackValue) + getAbilityAttack(abilityList[i]), getAttackName(newCharacter.attackValue))
 		newCharacter.attackValue = newAttack
 	next i
 	
 	for j = 0 to itemList.length
-		newCharacter.remainingHP = newCharacter.remainingHP + getItemDamage(itemList[i])
+		newCharacter.remainingHP = newCharacter.remainingHP + getItemDamage(itemList[i].index)
 	next j
 
 endfunction newCharacter

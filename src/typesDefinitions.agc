@@ -41,17 +41,23 @@ Type abilityStatus
 	
 	desc as String
 	
+	index as integer
+	
 endType
 
 Type eventStatus
 	
 	hasItem as String
 	
+	itemQtd as integer
+	
 	itemList as itemStatus[]
 	
 	desc as String
 	
 	options as String[]
+	
+	enemyQtd as integer
 	
 	enemyHolder as enemyStatus[]
 	
@@ -89,7 +95,7 @@ Type enemyStatus
 	
 	name as String
 	
-	desc as String[]
+	desc as String
 	
 	attacksDesc as attackStatus[]
 	
@@ -108,3 +114,18 @@ Type attackStatus
 	name as String
 	
 endType
+
+Type gameStructure
+	
+	allPlayers as playerStatus[]
+	currentPlayer as playerStatus
+	
+	allAbilities as abilityStatus[]
+	
+	allItems as itemStatus[]
+	
+	allEvents as eventStatus[]
+	
+	allEnemies as enemyStatus[]
+
+endtype

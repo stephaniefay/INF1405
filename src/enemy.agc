@@ -1,7 +1,7 @@
 global lastIndexEnemy as integer
 global enemyLst as enemyStatus[]
 
-function createEnemy (typeScene as integer[], absoluteHP as integer, modifier as integer, eventHolder as eventStatus[], name as String, desc as String[], attacksDesc as attackStatus[], talksList as String[], deffense as integer)
+function createEnemy (typeScene as integer[], absoluteHP as integer, modifier as integer, eventHolder as eventStatus[], name as String, desc as String, attacksDesc as attackStatus[], talksList as String[], deffense as integer)
 	newEnemy as enemyStatus
 	
 	newEnemy.absoluteHP = absoluteHP
@@ -76,3 +76,13 @@ endfunction damage
 function getEnemyDamageTaken (index as integer, damage as integer)
 	enemyLst[index].remainingHP = enemyLst[index].remainingHP - (enemyLst[index].deffense - damage)
 endfunction
+
+function getAllEnemies ()
+endfunction enemyLst
+
+function getEnemy (index as integer)
+endfunction enemyLst[index]
+
+function getRandomEnemy ()
+	randomIndex = Random(0, lastIndexEnemy-1)
+endfunction randomIndex

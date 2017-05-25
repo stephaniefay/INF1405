@@ -53,14 +53,14 @@ FILE_9=src%2Fattacks.agc;-1
 FILE_10=src%2FreadFromText.agc;-1
 
 [files]
-FILE_NAME_0=0;src%2FtypesDefinitions.agc;257;0
-FILE_NAME_1=0;src%2Fability.agc;766;2
-FILE_NAME_2=0;src%2Fcharacter.agc;1178;1
-FILE_NAME_3=0;src%2Fevent.agc;751;3
-FILE_NAME_4=0;src%2Fitem.agc;821;4
-FILE_NAME_5=0;src%2Fenemy.agc;2081;5
-FILE_NAME_6=0;src%2Fattacks.agc;322;6
-FILE_NAME_7=1;src%2FreadFromText.agc;0;7
+FILE_NAME_0=0;src%2FtypesDefinitions.agc;205;0
+FILE_NAME_1=0;src%2Fability.agc;311;7
+FILE_NAME_2=1;src%2Fcharacter.agc;1870;6
+FILE_NAME_3=0;src%2Fevent.agc;751;1
+FILE_NAME_4=0;src%2Fitem.agc;821;2
+FILE_NAME_5=0;src%2Fenemy.agc;2081;3
+FILE_NAME_6=0;src%2Fattacks.agc;145;4
+FILE_NAME_7=0;src%2FreadFromText.agc;218;5
 
 [project]
 description=

@@ -66,26 +66,59 @@ Loading: dentro de media/saves ele vai ler o arquivo mais recente e carregar as 
 Pre-Loading: dentro da pasta media/infoGame tem um único arquivo chamado info.txt, deste ele vai carregar todas as configurações iniciais do jogo como itens, eventos, personagens disponíveis, inimigos e habilidades. Para acrescentar novos é necessário que entenda a estrutura do arquivo e altere o txt da maneira correta.
 
 ```
-
+Abilities
+	Nome da habilidade (string)
+	HP ganho com a habilidade (integer)
+	Defesa ganha com a habilidade (integer)
+	Ataque ganho com a habilidade (integer)
+	Modificador ganho com a habilidade (integer)
+	Descrição da Habilidade (string)
+Events
+	Se o evento possui item (bool)
+	Quantidade de itens (integer) (-1 não tem itens)
+	Descrição do evento (string)
+	Quantidade de opções disponíveis para esse evento
+	opção (string) (1)
+	(...)
+	opção (string) (n)
+	Quantidade de inimigos (integer) (-1 não tem inimigos)
+Items
+	Nome do item (string)
+	Index da habilidade relacionada ao item (integer) (-1 não tem habilidade)
+	Dano causado ao jogador quando pega o item (integer) (se <0 recupera a vida)
+	Descrição do item (string)
+	Index do evento relacionado ao item (integer) (-1 não tem evento)
+Enemies
+	Quantidade de cenas que o inimigo aparece (integer) (sempre >= 1)
+	Index da cena (integer) (1)
+	(...)
+	Index da cena (integer) (n)
+	HP do inimigo (integer)
+	Modificador do inimigo (integer)
+	Index do evento relacionado ao inimigo (integer) (-1 não tem evento)
+	Nome do inimigo (string)
+	Descrição do inimigo (string)
+	Quantidade de ataques que o inimigo possui (integer) (sempre >= 1)
+	Valor do dano do ataque (integer) (1)
+	Nome do Ataque (string)(1)
+	(...)
+	Valor do dano do ataque (integer) (n)
+	Nome do Ataque (string) (n)
+	Quantidade de falas do inimigo (integer) (sempre >=1)
+	fala (string) (1)
+	(...)
+	fala (string) (n)
+	Defesa do inimigo (integer)
 Characters
-quantidade de personagens que você tem em sua lista
-HP
-nome do item nativo
-nome da habilidade nativa
-diferença de hp que a habilidade causa (0 se nenhuma, <0 caso decremente, >0 caso aumente)
-diferença de defesa que a habilidade causa
-diferença de ataque que a habilidade causa
-diferença de modificador de ataque que a habilidade causa
-descrição da habilidade
-valor do dano que o item causa em seu personagem
-descrição do item
-nome do seu personagem
-descrição do seu personagem
-valor de ataque do seu personagem
-nome do ataque do seu personagem
-valor do modificador do seu personagem
-valor da defesa do seu personagem
-
+	HP do personagem (integer)
+	Index do item nativo do personagem (integer) (-1 não tem item)
+	Index da habilidade nativa do personagem (integer) (-1 não tem habilidade)
+	Nome do personagem (string)
+	Descrição do personagem (string)
+	Valor do ataque do personagem (integer)
+	Nome do ataque do personagem (string)
+	Modificador do personagem (integer)
+	Defesa do personagem (integer)
 ```
 
 (esse guia vai ser atualizado conforme for feito o código da leitura dos outros tópicos).

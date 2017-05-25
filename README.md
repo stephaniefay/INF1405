@@ -67,6 +67,7 @@ Pre-Loading: dentro da pasta media/infoGame tem um único arquivo chamado info.t
 
 ```
 Abilities
+	Quantidade de habilidades no arquivo (integer)
 	Nome da habilidade (string)
 	HP ganho com a habilidade (integer)
 	Defesa ganha com a habilidade (integer)
@@ -74,6 +75,7 @@ Abilities
 	Modificador ganho com a habilidade (integer)
 	Descrição da Habilidade (string)
 Events
+	Quantidade de eventos no arquivo (integer)
 	Se o evento possui item (bool)
 	Quantidade de itens (integer) (-1 não tem itens)
 	Descrição do evento (string)
@@ -83,12 +85,14 @@ Events
 	opção (string) (n)
 	Quantidade de inimigos (integer) (-1 não tem inimigos)
 Items
+	Quantidade de itens do arquivo (integer)
 	Nome do item (string)
 	Index da habilidade relacionada ao item (integer) (-1 não tem habilidade)
 	Dano causado ao jogador quando pega o item (integer) (se <0 recupera a vida)
 	Descrição do item (string)
 	Index do evento relacionado ao item (integer) (-1 não tem evento)
 Enemies
+	Quantidade de inimigos no arquivo (integer)
 	Quantidade de cenas que o inimigo aparece (integer) (sempre >= 1)
 	Index da cena (integer) (1)
 	(...)
@@ -110,6 +114,7 @@ Enemies
 	fala (string) (n)
 	Defesa do inimigo (integer)
 Characters
+	Quantidade de personagens do arquivo (integer)
 	HP do personagem (integer)
 	Index do item nativo do personagem (integer) (-1 não tem item)
 	Index da habilidade nativa do personagem (integer) (-1 não tem habilidade)
@@ -120,8 +125,6 @@ Characters
 	Modificador do personagem (integer)
 	Defesa do personagem (integer)
 ```
-
-(esse guia vai ser atualizado conforme for feito o código da leitura dos outros tópicos).
 
 ### Programas e/ou Ferramentas utilizadas até o momento
 

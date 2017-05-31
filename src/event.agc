@@ -23,8 +23,9 @@ endfunction
 
 function updateAllItemsEvents()
 	for i = 0 to lastIndexEvent-1
-		if eventLst[i].itemQtd > -1
-			for j = 0 to eventLst[i].itemQtd
+		count = eventLst[i].itemQtd - 1
+		if count > -1
+			for j = 0 to count
 				eventLst[i].itemList.insert(getItem(getRandomItem()))
 			next j
 		endif
@@ -33,8 +34,9 @@ endfunction
 
 function updateAllEnemiesEvent()
 	for i = 0 to lastIndexEvent-1
-		if eventLst[i].enemyQtd > -1
-			for j = 0 to eventLst[i].enemyQtd
+		count = eventLst[i].enemyQtd-1
+		if count > -1
+			for j = 0 to count
 				eventLst[i].enemyHolder.insert(GetEnemy(getRandomEnemy()))
 			next j
 		endif
@@ -58,4 +60,3 @@ endfunction eventLst[index]
 
 function getAllEvents ()
 endfunction eventLst
-

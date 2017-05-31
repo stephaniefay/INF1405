@@ -18,6 +18,7 @@ function getInfo ()
 			for j = 0 to count-1
 				
 				absoluteHP as integer
+				
 				indexItemCharacter as integer
 				indexAbilityCharacter as integer
 				eventHolder as eventStatus[]
@@ -41,8 +42,12 @@ function getInfo ()
 				modifierCharacter = Val(ReadLine(file))
 				deffenseCharacter = Val(ReadLine(file))
 				
-				itemList.insert(getItem(indexItemCharacter))
-				abilityList.insert(getAbility(indexAbilityCharacter))
+				if indexItemCharacter > -1
+					itemList.insert(getItem(indexItemCharacter-1))
+				endif
+				if indexAbilityCharacter > -1
+					abilityList.insert(getAbility(indexAbilityCharacter-1))
+				endif
 				attackValue = createAttack(damage, nameAttack)
 				
 				newPlayer as playerStatus
@@ -93,13 +98,13 @@ function getInfo ()
 				nameItem = ReadLine(file)
 				indexAbilityItem = Val(ReadLine(file))
 				if indexAbilityItem > -1
-					abilityItem = getAbility(indexAbilityItem)
+					abilityItem = getAbility(indexAbilityItem-1)
 				endif
 				damageItem = Val(ReadLine(file))
 				descItem = ReadLine(file)
 				indexEventItem = Val(ReadLine(file))
 				if indexEventItem > -1
-					eventHolderItem.insert(getEvent(indexEventItem))
+					eventHolderItem.insert(getEvent(indexEventItem-1))
 				endif
 				
 				createItem(nameItem, abilityItem, damageItem, descItem, eventHolderItem)
@@ -127,12 +132,17 @@ function getInfo ()
 				qtdItem = Val(ReadLine(file))
 				desc = ReadLine(file)
 				
-				for k = 0 to Val(ReadLine(file))-1
+				count2 = Val(ReadLine(file))-1
+				
+				for k = 0 to count2
 					options.insert(ReadLine(file))
 				next k
 				
 				qtdEnemy = Val(ReadLine(file))
-				for k = 0 to Val(ReadLine(file))-1
+
+				count2 = Val(ReadLine(file))-1
+
+				for k = 0 to count2
 					canAppearScene.insert(Val(ReadLine(file)))
 				next k
 				
@@ -160,7 +170,9 @@ function getInfo ()
 					talksListEnemy as String[]
 					deffenseEnemy as integer
 					
-					for k = 0 to Val(ReadLine(file))-1
+					count2 = Val(ReadLine(file))-1
+					
+					for k = 0 to count2
 						typeScene.insert(Val(ReadLine(file)))
 					next k
 					
@@ -169,17 +181,21 @@ function getInfo ()
 					indexEventEnemy = Val(ReadLine(file))
 					
 					if indexEventEnemy > -1
-						eventHolder.insert(getEvent(indexEventEnemy))
+						eventHolder.insert(getEvent(indexEventEnemy-1))
 					endif
 					
 					nameEnemy = ReadLine(file)
 					descEnemy = ReadLine(file)
 					
-					for k = 0 to Val(ReadLine(file))
+					count2 = Val(ReadLine(file))-1
+					
+					for k = 0 to count2
 						attacksDescEnemy.insert(createAttack(Val(ReadLine(file)),ReadLine(file)))
 					next k
+
+					count2 = Val(ReadLine(file))-1
 					
-					for k = 0 to Val(ReadLine(file))-1
+					for k = 0 to count2
 						talksListEnemy.insert(ReadLine(file))
 					next k
 					

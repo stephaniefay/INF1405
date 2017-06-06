@@ -1,4 +1,4 @@
-#include "src/beginHandler.agc"
+#include "src/starterModule.agc"
 
 // show all errors
 SetErrorMode(2)
@@ -238,7 +238,7 @@ do
 			DeleteSprite(spriteStarPlay)
 			DeleteSprite(spriteStarLoad)
 			DeleteAllText()
-			begin_game()
+			start()
 		endif
 
 		if (hitExit = 1)

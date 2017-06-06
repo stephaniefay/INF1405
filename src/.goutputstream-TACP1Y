@@ -34,17 +34,9 @@ function begin_game (inputString as String)
 	attention = 0
 	do
 		narrationArray = Antonstypewriter( narrationArray, inputString, 1, 45 )
-		if GetPointerPressed() = 1
-			exitfunction 1
-		endif
 		Sync()
 	loop
 
-endfunction 1
-
-function clearAll ()
-	DeleteAllText()
-	Sync()
 endfunction
 
 
@@ -70,6 +62,10 @@ Function Antonstypewriter ( temp as _Antonstypewriter, input$, min, max )
                 If NOT mid( temp.input, temp.pos, 1 ) = " "
                     PlaySound( temp.key )
                 EndIf
+                
+                if GetPointerPressed() = 1
+					exitfunction temp
+				endif
                 
             EndIf
 

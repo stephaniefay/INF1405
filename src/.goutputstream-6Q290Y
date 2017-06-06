@@ -1,0 +1,16 @@
+#include "src/typesDefinitions.agc"
+#include "src/readFromText.agc"
+#include "src/beginHandler.agc"
+
+
+function start () 
+	gameInfos as gameStructure 
+	gameInfos = getInfo()
+
+	do
+		
+		begin_game("")
+
+		Sync()
+	loop
+endfunction

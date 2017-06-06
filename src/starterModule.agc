@@ -1,156 +1,60 @@
 #include "src/typesDefinitions.agc"
 #include "src/readFromText.agc"
+#include "src/beginHandler.agc"
 
-function start () 
 
-	flag = 0
-	teste as gameStructure
+
+function start () 	
+	aux as integer
+	showInScreen as String
 	
+	showInScreen = "Teste de narração, aqui vai a narração do jogo inicial, se for necessário mais de um quadro de narração é só gerenciar isso no if. Após toda a narração inicial, virá a escolha dos personagens. (Você pode passar a qualquer momento clicando com o mouse)"
+	aux = 0
+	
+	gameInfos as gameStructure
+	position = 150
 	do
-		if flag = 0
-			teste = getInfo()
-			inc flag
+		if aux = 0
+			aux = begin_game(showInScreen)
+			gameInfos = getInfo()
 		endif
-		
-		if flag = 1
-			print("Habilidade")
-			print("Ataque")
-			print(teste.allAbilities[0].attack)
-			print("Defesa")
-			print(teste.allAbilities[0].deffense)
-			print("Descrição")
-			print(teste.allAbilities[0].desc)
-			print("HP")
-			print(teste.allAbilities[0].hp)
-			print("Index")
-			print(teste.allAbilities[0].index)
-			print("Modifier")
-			print(teste.allAbilities[0].modifier)
-			print("Name")
-			print(teste.allAbilities[0].name)
+		if aux = 1
+			clearAll()
+			aux = 2
+		endif
+		if aux = 2			
+			title = CreateText("Escolha seu personagem: ")
+			SetTextSize(title, 50)
+			SetTextPosition(title, 10, 50)
 			
-			t# = timer()
-			print(t#)
-			
-			if (t# > 24)
-				inc flag
-				ResetTimer()
+			aux2 = gameInfos.allPlayers.length
+			for i = 0 to aux2
+				CreateText(i, gameInfos.allPlayers[i].name + ": " + gameInfos.allPlayers[i].desc)
+				SetTextMaxWidth(i, 1004)
+				SetTextSize(i, 50)
+				SetTextPosition(i, 20, (i+1)*position)
+			next i
+			aux = 3
+		endif
+		if aux = 3
+			if GetPointerPressed() = 1
+				for j = 0 to i
+					if (GetTextHitTest(j, GetPointerX(), GetPointerY()) = 1)
+						gameInfos.currentPlayer = gameInfos.allPlayers[j]
+						DeleteAllText()
+						gameSequence(gameInfos)
+					endif
+				next j
 			endif
-			
 		endif
-
-		if flag = 2
-			print("Inimigo")
-			print("HP")
-			print(teste.allEnemies[0].absoluteHP)
-			print("Nome + Dano Ataques")
-			print(teste.allEnemies[0].attacksDesc[0].damage)
-			print(teste.allEnemies[0].attacksDesc[0].name)
-			print(teste.allEnemies[0].attacksDesc[1].damage)
-			print(teste.allEnemies[0].attacksDesc[1].name)
-			print("Defesa")
-			print(teste.allEnemies[0].deffense)
-			print("Descrição")
-			print(teste.allEnemies[0].desc)
-			print("Index")
-			print(teste.allEnemies[0].index)
-			print("Modificador")
-			print(teste.allEnemies[0].modifier)
-			print("Nome")
-			print(teste.allEnemies[0].name)
-			print("HP Restante")
-			print(teste.allEnemies[0].remainingHP)
-			print("Lista de falas")
-			print(teste.allEnemies[0].talksList[0])
-			print(teste.allEnemies[0].talksList[1])
-
-			t# = timer()
-			print(t#)
-			
-			if (t# > 24)
-				inc flag
-				ResetTimer()
-			endif
-		
-		endif
-		
-		if flag = 3
-			print("Evento")
-			print("Descrição")
-			print(teste.allEvents[0].desc)
-			print("Quantidade de Inimigos")
-			print(teste.allEvents[0].enemyQtd)
-			print("Possui Item")
-			print(teste.allEvents[0].hasItem)
-			print("Index")
-			print(teste.allEvents[0].index)
-			print("Quantidade de Itens")
-			print(teste.allEvents[0].itemQtd)
-			print("Opções")
-			print(teste.allEvents[0].options[0])
-			print(teste.allEvents[0].options[1])
-			print(teste.allEvents[0].options[2])
-			print(teste.allEvents[0].options[3])
-
-			t# = timer()
-			print(t#)
-			
-			if (t# > 24)
-				inc flag
-				ResetTimer()
-			endif
-
-		endif
-		
-		if flag = 4
-			print("Item")
-			print("Dano feito ao personagem")
-			print(teste.allItems[0].damage)
-			print("Descrição")
-			print(teste.allItems[0].desc)
-			print("Index")
-			print(teste.allItems[0].index)
-			print("Nome")
-			print(teste.allItems[0].name)
-
-			t# = timer()
-			print(t#)
-			
-			if (t# > 24)
-				inc flag
-				ResetTimer()
-			endif
-
-		endif
-		
-		if flag = 5
-			print("Jogador")
-			print("HP")
-			print(teste.allPlayers[0].absoluteHP)
-			print("Dano + Nome Ataque")
-			print(teste.allPlayers[0].attackValue.damage)
-			print(teste.allPlayers[0].attackValue.name)
-			print("Defesa")
-			print(teste.allPlayers[0].deffense)
-			print("Descrição")
-			print(teste.allPlayers[0].desc)
-			print("Modificador")
-			print(teste.allPlayers[0].modifier)
-			print("Nome")
-			print(teste.allPlayers[0].name)
-			print("HP Restante")
-			print(teste.allPlayers[0].remainingHP)
-
-			t# = timer()
-			print(t#)
-			
-			if (t# > 24)
-				inc flag
-				ResetTimer()
-			endif
-
-		endif
-
 		Sync()
 	loop
+endfunction
+
+function gameSequence (gameInfos as gameStructure) 
+	do
+		print(gameInfos.currentPlayer.name)
+	Sync()
+	loop
+	
 endfunction

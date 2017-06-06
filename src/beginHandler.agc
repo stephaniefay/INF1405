@@ -30,12 +30,17 @@ function begin_game (inputString as String)
 	narrationArray.output = CreateText( "" )
 	SetTextMaxWidth( narrationArray.output, 1004 )
 	narrationArray.key = LoadSound( "type.wav" )
-	
+
 	attention = 0
 	do
 		narrationArray = Antonstypewriter( narrationArray, inputString, 1, 45 )
-		if GetPointerPressed() = 1
-			exitfunction 1
+		if GetPointerState() = 0
+			attention = 1
+		endif
+		if attention = 1
+			if GetPointerPressed() = 1
+				exitfunction 1
+			endif
 		endif
 		Sync()
 	loop

@@ -60,3 +60,13 @@ endfunction eventLst[index]
 
 function getAllEvents ()
 endfunction eventLst
+
+function removeEvent (index as integer)
+	for i = index to eventLst.length
+		if not i = eventLst.length
+			eventLst[i] = eventLst[i+1]
+		endif
+	next i
+	
+	eventLst.remove()
+endfunction

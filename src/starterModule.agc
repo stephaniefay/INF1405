@@ -7,7 +7,6 @@
 function start () 	
 	aux as integer
 	showInScreen as String
-	
 	showInScreen = "Teste de narração, aqui vai a narração do jogo inicial, se for necessário mais de um quadro de narração é só gerenciar isso no if. Após toda a narração inicial, virá a escolha dos personagens. (Você pode passar a qualquer momento clicando com o mouse)"
 	aux = 0
 	
@@ -38,7 +37,7 @@ function start ()
 		endif
 		if aux = 3
 			if GetPointerPressed() = 1
-				for j = 0 to i
+				for j = 0 to i-1
 					if (GetTextHitTest(j, GetPointerX(), GetPointerY()) = 1)
 						gameInfos.currentPlayer = gameInfos.allPlayers[j]
 						DeleteAllText()
@@ -52,8 +51,18 @@ function start ()
 endfunction
 
 function gameSequence (gameInfos as gameStructure) 
+	aux = 0
+	currentEvent = -1
 	do
-		print(gameInfos.currentPlayer.name)
+	SELECT aux
+		case 0
+			currentEvent = random (0, gameInfos.allEvents.length)
+			aux = 1
+		endcase
+		case 1
+			
+		endcase
+	endselect
 	Sync()
 	loop
 	

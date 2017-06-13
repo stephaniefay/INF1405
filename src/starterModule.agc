@@ -41,6 +41,39 @@ function start ()
 	AddSpriteAnimationFrame ( spriteSwordRight, LoadImageResized("startMenu\right\sword_right (32).gif", 1, 1, 0) )
 	AddSpriteAnimationFrame ( spriteSwordRight, LoadImageResized("startMenu\right\sword_right (33).gif", 1, 1, 0) )
 	
+	fireSprite1 = CreateSprite(LoadImageResized("startMenu\fire\fire (1).gif", 0.3, 0.3, 0))
+
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (1).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (2).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (3).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (4).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (5).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (6).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (7).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (8).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (9).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (10).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (11).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (12).gif", 0.3, 0.3, 0) )
+	
+	fireSprite2 = CreateSprite(LoadImageResized("startMenu\fire\fire (1).gif", 0.3, 0.3, 0))
+
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (1).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (2).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (3).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (4).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (5).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (6).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (7).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (8).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (9).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (10).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (11).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (12).gif", 0.3, 0.3, 0) )
+	
+	SetSpritePosition(fireSprite1, -250, -250)
+	SetSpritePosition(fireSprite2, -250, -250)
+	
 	aux as integer
 	showInScreen as String
 	showInScreen = "Teste de narração, aqui vai a narração do jogo inicial, se for necessário mais de um quadro de narração é só gerenciar isso no if. Após toda a narração inicial, virá a escolha dos personagens. (Você pode passar a qualquer momento clicando com o mouse)"
@@ -73,12 +106,22 @@ function start ()
 
 				endif
 				gameInfos = getInfo()
-			endif			
+			endif
 			
 			if GetTextHitTest(secondText, GetPointerX(), GetPointerY()) = 1 
 				if attention = 1 and GetPointerPressed() = 1
 					aux = 1
 				endif
+				
+				SetSpritePosition(fireSprite1, 380, 370)
+				SetSpritePosition(fireSprite2, 560, 370)
+				if GetSpritePlaying(fireSprite1) = 0 and GetSpritePlaying(fireSprite2) = 0
+					playSprite(fireSprite1)
+					playSprite(fireSprite2)
+				endif
+			else
+				SetSpritePosition(fireSprite1, -250, -250)
+				SetSpritePosition(fireSprite2, -250, -250)
 			endif
 			
 			
@@ -90,6 +133,8 @@ function start ()
 
 		endif
 		if aux = 1
+			SetSpritePosition(fireSprite1, -250, -250)
+			SetSpritePosition(fireSprite2, -250, -250)
 			clearAll()
 			aux = 2
 		endif
@@ -170,8 +215,14 @@ function gameSequence (gameInfos as gameStructure)
 		case 1
 			if gameInfos.allEvents.length = -1
 				print("Game Over")
+				
+				if GetFileExists("saves\mostRecent.txt") = 1
+					fileName$ = copyArchive()
+					DeleteFile("saves\mostRecent.txt")					
+				endif
+				
 				if (attention = 1 and GetPointerState() = 1)
-						end
+					end
 				endif
 				
 				if GetPointerState() = 0
@@ -232,3 +283,49 @@ function gameSequence (gameInfos as gameStructure)
 	loop
 	
 endfunction
+
+function archive (typeIndex as integer, info as String)
+
+	file = OpenToWrite("saves\mostRecent.txt", 1)
+	
+	WriteLine (file, "==============================================")
+
+	select typeIndex
+		case 0
+			WriteLine (file, "Character: " + info)
+		endcase
+		
+		case 1
+			WriteLine (file, "Event: " + info)
+		endcase
+		
+		case 2
+			WriteLine (file, "Answer: " + info)
+		endcase
+		
+	endselect
+
+	closeFile(file)
+	
+endfunction
+
+function copyArchive ()
+	
+	time$ = Mid(GetCurrentTime(), 4, 2)
+	
+	newFile$ = GetCurrentDate() + "_" + time$ + ".txt"
+	archive = OpenToRead("saves\mostRecent.txt")
+	newArchive = OpenToWrite("saves\" + newFile$, 0)
+	
+	while FileEOF(archive) = 0
+		aux$ = ReadLine(archive)
+		WriteLine(newArchive, aux$)
+		print(aux$)
+		Sync()
+	endwhile
+	
+	CloseFile(archive)
+	CloseFile(newArchive)
+	
+endfunction newFile$
+

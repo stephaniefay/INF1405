@@ -11,6 +11,11 @@ function getInfo ()
 	for i = 0 to 4
 		r$ = ReadLine(file)
 		select r$
+			
+			case "=============================================="
+				dec i
+			endcase
+						
 			case "Characters"
 			count = Val(ReadLine(file))
 
@@ -41,6 +46,10 @@ function getInfo ()
 				nameAttack = ReadLine(file)
 				modifierCharacter = Val(ReadLine(file))
 				deffenseCharacter = Val(ReadLine(file))
+				
+				if count > 1 and j < count-1
+					offset$ = ReadLine(file)
+				endif
 				
 				if indexItemCharacter > -1
 					itemList.insert(getItem(indexItemCharacter-1))
@@ -76,6 +85,10 @@ function getInfo ()
 				modifierAbility = Val(ReadLine(file))
 				descAbility = ReadLine(file)
 				
+				if count > 1 and j < count-1
+					offset$ = ReadLine(file)
+				endif
+				
 				createAbility(nameAbility, hpAbility, deffenseAbility, attackAbility, modifierAbility, descAbility)
 			
 			next j
@@ -105,6 +118,10 @@ function getInfo ()
 				indexEventItem = Val(ReadLine(file))
 				if indexEventItem > -1
 					eventHolderItem.insert(getEvent(indexEventItem-1))
+				endif
+				
+				if count > 1 and j < count-1
+					offset$ = ReadLine(file)
 				endif
 				
 				createItem(nameItem, abilityItem, damageItem, descItem, eventHolderItem)
@@ -150,6 +167,10 @@ function getInfo ()
 				for k = 0 to count2
 					canAppearScene.insert(Val(ReadLine(file)))
 				next k
+				
+				if count > 1 and j < count-1
+					offset$ = ReadLine(file)
+				endif
 				
 				createEvent(hasItem, qtdItem, itemListEvent, desc, options, qtdEnemy, enemyHolder, canAppearScene)
 				
@@ -205,6 +226,10 @@ function getInfo ()
 					next k
 					
 					deffenseEnemy = Val(ReadLine(file))
+					
+					if count > 1 and j < count-1
+						offset$ = ReadLine(file)
+					endif
 					
 					createEnemy(typeScene, absoluteHPEnemy, modifierEnemy, eventHolderEnemy, nameEnemy, descEnemy, attacksDescEnemy, talksListEnemy, deffenseEnemy)					
 					

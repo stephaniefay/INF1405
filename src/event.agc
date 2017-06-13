@@ -70,3 +70,6 @@ function removeEvent (index as integer)
 	
 	eventLst.remove()
 endfunction
+
+function getEventIndex (index as integer)
+endfunction eventLst[index].index

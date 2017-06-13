@@ -255,7 +255,7 @@ function gameSequence (gameInfos as gameStructure)
 				flag = writeOnScreen(getEventDesc(currentEvent))
 				
 				temp.insert(getEventDesc(currentEvent))
-				temp.insert(Str(currentEvent))
+				temp.insert(Str(getEventIndex(currentEvent)))
 				
 				archive(1, temp)
 				

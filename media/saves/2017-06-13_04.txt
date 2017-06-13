@@ -85,17 +85,10 @@ Fala 2
 ==============================================
 Character: 
 10
-Nome do Personagem Teste3
+Nome do Personagem Teste1
 Descrição do Personagem Teste
 10
 Nome do Ataque Teste do Personagem
 1
 10
-==============================================
-Event: Descrição do evento teste1 - 0
-==============================================
-Answer: Opção 1
-==============================================
-Event: Descrição do evento teste2 - 0
-==============================================
-Answer: Opção 4
+

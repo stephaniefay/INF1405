@@ -90,7 +90,7 @@ function start ()
 		if aux = 0
 			
 			if flag < 0
-				flag = begin_game(showInScreen)
+				flag = writeOnScreen(showInScreen)
 				if flag = 1
 					firstText = CreateText(showInScreen)
 					SetTextMaxWidth(firstText, 1004)
@@ -105,6 +105,7 @@ function start ()
 
 				endif
 				gameInfos = getInfo()
+				inicializeArchive(gameInfos)
 			endif
 			
 			if GetTextHitTest(secondText, GetPointerX(), GetPointerY()) = 1 
@@ -165,6 +166,28 @@ function start ()
 			
 			if hitText > -1
 				gameInfos.currentPlayer = gameInfos.allPlayers[hitText]
+				
+				// log of the character choosen
+				temp as String[]
+				temp.insert(Str(gameInfos.currentPlayer.absoluteHP))
+				
+				for i = 0 to gameInfos.currentPlayer.itemList.length
+					temp.insert(Str(gameInfos.currentPlayer.itemList[i].index))
+				next i
+				
+				for i = 0 to gameInfos.currentPlayer.abilityList.length
+					temp.insert(Str(gameInfos.currentPlayer.abilityList[i].index))
+				next i
+				
+				temp.insert(gameInfos.currentPlayer.name)
+				temp.insert(gameInfos.currentPlayer.desc)
+				temp.insert(Str(gameInfos.currentPlayer.attackValue.damage))
+				temp.insert(gameInfos.currentPlayer.attackValue.name)
+				temp.insert(Str(gameInfos.currentPlayer.modifier))
+				temp.insert(Str(gameInfos.currentPlayer.deffense))
+
+				archive(0, temp)
+				
 				DeleteAllText()
 				gameSequence(gameInfos)
 			endif
@@ -191,9 +214,6 @@ function start ()
 			
 		endif
 
-
-
-		
 		Sync()
 	loop
 endfunction
@@ -204,6 +224,8 @@ function gameSequence (gameInfos as gameStructure)
 	
 	hitText = -1
 	attention = 0
+	
+	temp as String[]
 	
 	do
 	SELECT aux
@@ -230,7 +252,16 @@ function gameSequence (gameInfos as gameStructure)
 				endif
 			
 			else
-				flag = begin_game(getEventDesc(currentEvent))
+				flag = writeOnScreen(getEventDesc(currentEvent))
+				
+				temp.insert(getEventDesc(currentEvent))
+				temp.insert(Str(currentEvent))
+				
+				archive(1, temp)
+				
+				temp.remove()
+				temp.remove()
+				
 				if flag = 1
 					event = CreateText(getEventDesc(currentEvent))
 					SetTextMaxWidth(event, 1004)
@@ -266,6 +297,11 @@ function gameSequence (gameInfos as gameStructure)
 			
 			if hitText > -1
 				DeleteAllText()
+				
+				temp.insert(options[hitText])
+				archive(2, temp)
+				temp.remove()
+				
 				aux = 0
 			endif
 			
@@ -282,7 +318,7 @@ function gameSequence (gameInfos as gameStructure)
 	
 endfunction
 
-function archive (typeIndex as integer, info as String)
+function archive (typeIndex as integer, info as String[])
 
 	file = OpenToWrite("raw:" + GetDocumentsPath() + "\A New Adventure\media\saves\mostRecent.txt", 1)
 	
@@ -290,21 +326,148 @@ function archive (typeIndex as integer, info as String)
 
 	select typeIndex
 		case 0
-			WriteLine (file, "Character: " + info)
+			WriteLine (file, "Character: ")
+			
+			for i = 0 to info.length
+				WriteLine(file, info[i])
+			next i
+			
 		endcase
 		
 		case 1
-			WriteLine (file, "Event: " + info)
+			WriteLine (file, "Event: " + info[0] + " - " + info[1])
 		endcase
 		
 		case 2
-			WriteLine (file, "Answer: " + info)
+			WriteLine (file, "Answer: " + info[0])
 		endcase
 		
 	endselect
 
 	closeFile(file)
 	
+endfunction
+
+function inicializeArchive (info as gameStructure)
+	
+	fileTemp = OpenToWrite("raw:" + GetDocumentsPath() + "\A New Adventure\media\saves\mostRecent.txt", 0)
+	
+	for i = 0 to info.allPlayers.length
+		
+		WriteLine(fileTemp, Str(info.allPlayers[i].absoluteHP))
+
+		for j = 0 to info.allPlayers[i].itemList.length
+			WriteLine(fileTemp, Str(info.allPlayers[i].itemList[j].index))
+		next j
+		
+		for j = 0 to info.allPlayers[i].abilityList.length
+			WriteLine(fileTemp, Str(info.allPlayers[i].abilityList[i].index))
+		next j
+		
+		WriteLine(fileTemp, info.allPlayers[i].name)
+		WriteLine(fileTemp, info.allPlayers[i].desc)
+		WriteLine(fileTemp, Str(info.allPlayers[i].modifier))
+		WriteLine(fileTemp, Str(info.allPlayers[i].attackValue.damage))
+		WriteLine(fileTemp, info.allPlayers[i].attackValue.name)
+		WriteLine(fileTemp, Str(info.allPlayers[i].deffense))			
+		
+	next i
+
+	WriteLine (fileTemp, "==============================================")
+
+	for i = 0 to info.allAbilities.length
+		
+		WriteLine(fileTemp, info.allAbilities[i].name)
+		WriteLine(fileTemp, Str(info.allAbilities[i].hp))
+		WriteLine(fileTemp, Str(info.allAbilities[i].deffense))
+		WriteLine(fileTemp, Str(info.allAbilities[i].attack))
+		WriteLine(fileTemp, Str(info.allAbilities[i].modifier))
+		WriteLine(fileTemp, info.allAbilities[i].desc)
+		WriteLine(fileTemp, Str(info.allAbilities[i].index))
+		
+	next i
+
+	WriteLine (fileTemp, "==============================================")
+
+	for i = 0 to info.allItems.length
+		
+		WriteLine(fileTemp, info.allItems[i].name)
+		WriteLine(fileTemp, Str(info.allItems[i].ability.index))
+		WriteLine(fileTemp, Str(info.allItems[i].damage))
+		WriteLine(fileTemp, info.allItems[i].desc)
+		
+		for j = 0 to info.allItems[i].eventHolder.length
+			WriteLine(fileTemp, Str(info.allItems[i].eventHolder[j].index))
+		next j
+		
+		WriteLine(fileTemp, Str(info.allItems[i].index))
+		
+	next i
+
+	WriteLine (fileTemp, "==============================================")
+	
+	for i = 0 to info.allEvents.length
+		
+		WriteLine(fileTemp, info.allEvents[i].hasItem)
+		WriteLine(fileTemp, Str(info.allEvents[i].itemQtd))
+		
+		for j = 0 to info.allEvents[i].itemList.length
+			WriteLine(fileTemp, Str(info.allEvents[i].itemList[j].index))
+		next j
+		
+		WriteLine(fileTemp, info.allEvents[i].desc)
+		
+		for j = 0 to info.allEvents[i].options.length
+			WriteLine(fileTemp, info.allEvents[i].options[j])
+		next j
+		
+		WriteLine(fileTemp, Str(info.allEvents[i].enemyQtd))
+		
+		for j = 0 to info.allEvents[i].enemyHolder.length
+			WriteLine(fileTemp, Str(info.allEvents[i].enemyHolder[j].index))
+		next j
+		
+		for j = 0 to info.allEvents[i].canAppearScene.length
+			WriteLine(fileTemp, Str(info.allEvents[i].canAppearScene[j]))
+		next j
+		
+		WriteLine(fileTemp, Str(info.allEvents[i].index))
+		
+	next i
+	
+	WriteLine (fileTemp, "==============================================")
+	
+	for i =  0 to info.allEnemies.length
+		
+		for j = 0 to info.allEnemies[i].typeScene.length
+			WriteLine(fileTemp, Str(info.allEnemies[i].typeScene[j]))
+		next j
+		
+		WriteLine(fileTemp, Str(info.allEnemies[i].absoluteHP))
+		WriteLine(fileTemp, Str(info.allEnemies[i].modifier))
+		
+		for j = 0 to info.allEnemies[i].eventHolder.length
+			WriteLine(fileTemp, Str(info.allEnemies[i].eventHolder[j].index))
+		next j
+		
+		WriteLine(fileTemp, info.allEnemies[i].name)
+		WriteLine(fileTemp, info.allEnemies[i].desc)
+		
+		for j = 0 to info.allEnemies[i].attacksDesc.length
+			WriteLine(fileTemp, Str(info.allEnemies[i].attacksDesc[j].damage))
+			WriteLine(fileTemp, info.allEnemies[i].attacksDesc[j].name)
+		next j
+		
+		for j = 0 to info.allEnemies[i].talksList.length
+			WriteLine(fileTemp, info.allEnemies[i].talksList[j])
+		next j
+		
+		WriteLine(fileTemp, Str(info.allEnemies[i].deffense))
+		WriteLine(fileTemp, Str(info.allEnemies[i].index))
+
+	next i
+	
+	CloseFile(fileTemp)	
 endfunction
 
 function copyArchive ()

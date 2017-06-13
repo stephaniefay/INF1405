@@ -249,7 +249,4 @@ function getInfo ()
 	completeGame.allItems = getAllItems()
 	completeGame.allPlayers = charactersSelectLst
 
-	fileTemp = OpenToWrite("raw:" + GetDocumentsPath() + "\A New Adventure\media\saves\mostRecent.txt", 0)
-	CloseFile(fileTemp)
-
 endfunction completeGame

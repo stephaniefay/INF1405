@@ -21,7 +21,7 @@ Type typeWriter
 
 EndType
 	
-function begin_game (inputString as String)
+function writeOnScreen (inputString as String)
 	SetClearColor(0,0,0)
 	narrationArray as typeWriter
 	narrationArray.time = timer()

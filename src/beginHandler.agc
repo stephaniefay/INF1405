@@ -1,31 +1,29 @@
 #include "src/starterModule.agc"
 
-Type _Antonstypewriter
+Type typeWriter
+	input as string
 
-		//This is the entered text.
-		input as string
-		//This is the ID number of our text object
-		output as integer
-		//This is the length of our entered text
-		length as integer
-		//This is the current position of our text
-		pos as integer
-		//This is the mode of our function, 0 sets everything up, 1 types it out
-		flag as integer
-		//This keeps keeps loops out of our function, by substituting timer based delays instead
-		time as float
-		//This provides some extra diagnostic information
-		diagnostic as integer
-		//This is the sound file for our key sound
-		key as integer
-		//This is the sound file for our space bar sound
-		space as integer
+	output as integer
+
+	length as integer
+
+	pos as integer
+
+	flag as integer
+
+	time as float
+
+	diagnostic as integer
+
+	key as integer
+
+	space as integer
 
 EndType
 	
 function begin_game (inputString as String)
 	SetClearColor(0,0,0)
-	narrationArray as _Antonstypewriter
+	narrationArray as typeWriter
 	narrationArray.time = timer()
 	narrationArray.output = CreateText( "" )
 	SetTextMaxWidth( narrationArray.output, 1004 )
@@ -33,7 +31,7 @@ function begin_game (inputString as String)
 
 	attention = 0
 	do
-		narrationArray = Antonstypewriter( narrationArray, inputString, 1, 45 )
+		narrationArray = writeInfo( narrationArray, inputString, 1, 45 )
 		if GetPointerState() = 0
 			attention = 1
 		endif
@@ -58,7 +56,7 @@ function clearAll ()
 endfunction
 
 
-Function Antonstypewriter ( temp as _Antonstypewriter, input$, min, max )
+Function writeInfo ( temp as typeWriter, input$, min, max )
     Select temp.flag
         
         Case 0

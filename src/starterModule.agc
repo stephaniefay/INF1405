@@ -217,7 +217,7 @@ function gameSequence (gameInfos as gameStructure)
 				print("Game Over")
 				
 				if GetFileExists("saves\mostRecent.txt") = 1
-					fileName$ = copyArchive()
+					copyArchive()
 					DeleteFile("saves\mostRecent.txt")					
 				endif
 				
@@ -318,14 +318,11 @@ function copyArchive ()
 	newArchive = OpenToWrite("saves\" + newFile$, 0)
 	
 	while FileEOF(archive) = 0
-		aux$ = ReadLine(archive)
-		WriteLine(newArchive, aux$)
-		print(aux$)
-		Sync()
+		WriteLine(newArchive, ReadLine(archive))
 	endwhile
 	
 	CloseFile(archive)
 	CloseFile(newArchive)
 	
-endfunction newFile$
+endfunction
 

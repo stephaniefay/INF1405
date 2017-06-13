@@ -342,6 +342,14 @@ function archive (typeIndex as integer, info as String[])
 			WriteLine (file, "Answer: " + info[0])
 		endcase
 		
+		case 3
+			WriteLine(file, "Include item (" + info[0] + " - " + info[1] + ") for player.")
+		endcase
+		
+		case 4
+			WriteLine(file, "Include ability (" + info[0] + " - " + info[1] + ") for player.")
+		endcase
+		
 	endselect
 
 	closeFile(file)
@@ -466,6 +474,10 @@ function inicializeArchive (info as gameStructure)
 		WriteLine(fileTemp, Str(info.allEnemies[i].index))
 
 	next i
+	
+	WriteLine (fileTemp, "==============================================")
+	WriteLine (fileTemp, "Begin of the gameplay: ")
+	
 	
 	CloseFile(fileTemp)	
 endfunction

@@ -83,12 +83,22 @@ Fala 2
 10
 0
 ==============================================
+Begin of the gameplay: 
+==============================================
 Character: 
 10
-Nome do Personagem Teste1
+Nome do Personagem Teste2
 Descrição do Personagem Teste
 10
 Nome do Ataque Teste do Personagem
 1
 10
+==============================================
+Event: Descrição do evento teste1 - 0
+==============================================
+Answer: Opção 2
+==============================================
+Event: Descrição do evento teste2 - 1
+==============================================
+Answer: Opção 4
 

@@ -8,14 +8,10 @@ function getInfo ()
 	
 	file = OpenToRead("infoGame/info.txt")
 	
-	for i = 0 to 4
+	while FileEOF(file) = 0
 		r$ = ReadLine(file)
+		
 		select r$
-			
-			case "=============================================="
-				dec i
-			endcase
-						
 			case "Characters"
 			count = Val(ReadLine(file))
 
@@ -235,9 +231,9 @@ function getInfo ()
 					
 				next j
 			endcase
-			
 		endselect
-	next i
+
+	endwhile
 
 	updateAllEnemiesEvent()
 	updateAllItemsEvents()	

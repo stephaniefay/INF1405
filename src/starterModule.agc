@@ -74,7 +74,6 @@ function start ()
 	SetSpritePosition(fireSprite1, -250, -250)
 	SetSpritePosition(fireSprite2, -250, -250)
 	
-	aux as integer
 	showInScreen as String
 	showInScreen = "Teste de narração, aqui vai a narração do jogo inicial, se for necessário mais de um quadro de narração é só gerenciar isso no if. Após toda a narração inicial, virá a escolha dos personagens. (Você pode passar a qualquer momento clicando com o mouse)"
 	aux = 0
@@ -216,9 +215,8 @@ function gameSequence (gameInfos as gameStructure)
 			if gameInfos.allEvents.length = -1
 				print("Game Over")
 				
-				if GetFileExists("saves\mostRecent.txt") = 1
-					copyArchive()
-					DeleteFile("saves\mostRecent.txt")					
+				if GetFileExists("raw:" + GetDocumentsPath() + "\A New Adventure\media\saves\mostRecent.txt") = 1
+					copyArchive()		
 				endif
 				
 				if (attention = 1 and GetPointerState() = 1)
@@ -286,7 +284,7 @@ endfunction
 
 function archive (typeIndex as integer, info as String)
 
-	file = OpenToWrite("saves\mostRecent.txt", 1)
+	file = OpenToWrite("raw:" + GetDocumentsPath() + "\A New Adventure\media\saves\mostRecent.txt", 1)
 	
 	WriteLine (file, "==============================================")
 
@@ -314,8 +312,8 @@ function copyArchive ()
 	time$ = Mid(GetCurrentTime(), 4, 2)
 	
 	newFile$ = GetCurrentDate() + "_" + time$ + ".txt"
-	archive = OpenToRead("saves\mostRecent.txt")
-	newArchive = OpenToWrite("saves\" + newFile$, 0)
+	archive = OpenToRead("raw:" + GetDocumentsPath() + "\A New Adventure\media\saves\mostRecent.txt")
+	newArchive = OpenToWrite("raw:" + GetDocumentsPath() + "\A New Adventure\media\saves\" + newFile$, 0)
 	
 	while FileEOF(archive) = 0
 		WriteLine(newArchive, ReadLine(archive))

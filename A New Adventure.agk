@@ -54,9 +54,10 @@ FILE_10=src%2FreadFromText.agc;-1
 
 [files]
 FILE_NAME_0=0;src%2FbeginHandler.agc;1314;1
-FILE_NAME_1=0;main.agc;10112;2
-FILE_NAME_2=1;src%2FstarterModule.agc;7286;0
-FILE_NAME_3=0;src%2Fevent.agc;1569;3
+FILE_NAME_1=0;main.agc;9398;3
+FILE_NAME_2=0;src%2FstarterModule.agc;7264;0
+FILE_NAME_3=0;src%2Fevent.agc;1569;2
+FILE_NAME_4=1;src%2FreadFromText.agc;4598;4
 
 [project]
 description=

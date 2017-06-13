@@ -45,6 +45,7 @@ function start ()
 	showInScreen as String
 	showInScreen = "Teste de narração, aqui vai a narração do jogo inicial, se for necessário mais de um quadro de narração é só gerenciar isso no if. Após toda a narração inicial, virá a escolha dos personagens. (Você pode passar a qualquer momento clicando com o mouse)"
 	aux = 0
+	flag = -1
 	
 	gameInfos as gameStructure
 	position = 150
@@ -55,8 +56,38 @@ function start ()
 		endif
 		
 		if aux = 0
-			aux = begin_game(showInScreen)
-			gameInfos = getInfo()
+			
+			if flag < 0
+				flag = begin_game(showInScreen)
+				if flag = 1
+					firstText = CreateText(showInScreen)
+					SetTextMaxWidth(firstText, 1004)
+					SetTextPosition(firstText, 20, 50)
+					SetTextSize(firstText, 50)
+
+					secondText = CreateText("Começar Jogo!")
+					SetTextPosition(secondText, 400, 400)
+					SetTextSize(secondText, 30)
+
+					flag = 2
+
+				endif
+				gameInfos = getInfo()
+			endif			
+			
+			if GetTextHitTest(secondText, GetPointerX(), GetPointerY()) = 1 
+				if attention = 1 and GetPointerPressed() = 1
+					aux = 1
+				endif
+			endif
+			
+			
+			if GetPointerState() = 0
+				attention = 1
+			else
+				attention = 0
+			endif
+
 		endif
 		if aux = 1
 			clearAll()
@@ -77,31 +108,47 @@ function start ()
 			aux = 3
 		endif
 		if aux = 3
-			if GetPointerPressed() = 1
-				for j = 0 to i-1
-					if (GetTextHitTest(j, GetPointerX(), GetPointerY()) = 1)
-						gameInfos.currentPlayer = gameInfos.allPlayers[j]
-						DeleteAllText()
-						gameSequence(gameInfos)
+			
+			hitText = -1
+			
+			for i = 0 to aux2
+				if GetTextHitTest(i, GetPointerX(), GetPointerY())
+					if (attention = 1 and GetPointerState() = 1)
+						hitText = i
 					endif
-				next j
+				endif
+			next i
+			
+			if hitText > -1
+				gameInfos.currentPlayer = gameInfos.allPlayers[hitText]
+				DeleteAllText()
+				gameSequence(gameInfos)
 			endif
-		endif
-
-
-		if (GetTextHitTest(0, GetPointerX(), GetPointerY()) = 1)
-			SetSpritePosition(spriteSwordRight, 800, 1*position)
-		else
-			if GetTextHitTest(1, GetPointerX(), GetPointerY()) = 1
-				SetSpritePosition(spriteSwordRight, 800, 2*position)
+			
+			if GetPointerState() = 0
+				attention = 1
 			else
-				if GetTextHitTest(2, GetPointerX(), GetPointerY()) = 1
-					SetSpritePosition(spriteSwordRight, 800, 3*position)
+				attention = 0
+			endif
+			
+			if (GetTextHitTest(0, GetPointerX(), GetPointerY()) = 1)
+				SetSpritePosition(spriteSwordRight, 800, 1*position)
+			else
+				if GetTextHitTest(1, GetPointerX(), GetPointerY()) = 1
+					SetSpritePosition(spriteSwordRight, 800, 2*position)
 				else
-					SetSpritePosition(spriteSwordRight, -250, -250)
+					if GetTextHitTest(2, GetPointerX(), GetPointerY()) = 1
+						SetSpritePosition(spriteSwordRight, 800, 3*position)
+					else
+						SetSpritePosition(spriteSwordRight, -250, -250)
+					endif
 				endif
 			endif
+			
 		endif
+
+
+
 		
 		Sync()
 	loop

@@ -62,7 +62,7 @@ Fala 1
 Fala 2
 10
 Characters
-2
+3
 10
 -1
 -1
@@ -76,6 +76,15 @@ Nome do Ataque Teste do Personagem
 -1
 -1
 Nome do Personagem Teste2
+Descrição do Personagem Teste
+10
+Nome do Ataque Teste do Personagem
+1
+10
+10
+-1
+-1
+Nome do Personagem Teste3
 Descrição do Personagem Teste
 10
 Nome do Ataque Teste do Personagem

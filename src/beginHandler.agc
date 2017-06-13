@@ -42,6 +42,11 @@ function begin_game (inputString as String)
 				exitfunction 1
 			endif
 		endif
+		
+		if narrationArray.pos >= narrationArray.length
+			exitfunction 1
+		endif
+		
 		Sync()
 	loop
 

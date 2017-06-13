@@ -127,6 +127,11 @@ function getInfo ()
 				enemyHolder as enemyStatus[]
 				canAppearScene as integer[]
 				
+				optionsAux = options.length
+				
+				for k = 0 to optionsAux
+					options.remove()
+				next k
 				
 				hasItem = ReadLine(file)
 				qtdItem = Val(ReadLine(file))

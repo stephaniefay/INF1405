@@ -131,7 +131,6 @@ function getInfo ()
 			
 			for j = 0 to count-1
 					
-				hasItem as String
 				qtdItem as integer
 				itemListEvent as itemStatus[]
 				desc as String
@@ -139,6 +138,7 @@ function getInfo ()
 				qtdEnemy as integer
 				enemyHolder as enemyStatus[]
 				canAppearScene as integer[]
+				eventAux as String[]
 				
 				optionsAux = options.length
 				
@@ -146,7 +146,6 @@ function getInfo ()
 					options.remove()
 				next k
 				
-				hasItem = ReadLine(file)
 				qtdItem = Val(ReadLine(file))
 				desc = ReadLine(file)
 				
@@ -155,6 +154,16 @@ function getInfo ()
 				for k = 0 to count2
 					options.insert(ReadLine(file))
 				next k
+				
+				eventAux.remove()
+				eventAux.remove()
+				eventAux.remove()
+				
+				temp$ = ReadLine(file)
+				
+				eventAux.insert(mid(temp$,1, 1))
+				eventAux.insert(mid(temp$,3, 1))
+				eventAux.insert(mid(temp$,5,1))
 				
 				qtdEnemy = Val(ReadLine(file))
 
@@ -168,7 +177,7 @@ function getInfo ()
 					offset$ = ReadLine(file)
 				endif
 				
-				createEvent(hasItem, qtdItem, itemListEvent, desc, options, qtdEnemy, enemyHolder, canAppearScene)
+				createEvent(eventAux, qtdItem, itemListEvent, desc, options, qtdEnemy, enemyHolder, canAppearScene)
 				
 			next j
 			

@@ -47,7 +47,7 @@ endType
 
 Type eventStatus
 	
-	hasItem as String
+	eventAux as String[]
 	
 	itemQtd as integer
 	

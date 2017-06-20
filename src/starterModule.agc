@@ -309,11 +309,20 @@ function gameSequence (gameInfos as gameStructure)
 					tempItem = getEventItems(currentEvent)
 					for j = 0 to tempItem.length
 						updateCharacterItem(tempItem[j])
+						temp.insert(getItemNameByItem(tempItem[j]))
+						temp.insert(getItemDescByItem(tempItem[j]))
+						temp.insert(Str(getItemIndexByItem(tempItem[j])))
+						
+						archive(3, temp)
+						
+						temp.remove()
+						temp.remove()
+						temp.remove()
 					next j
 				endif
 				
 				if Val(tempEvent[1]) = hitText
-					//inimigos
+					gameInfos.currentPlayer = combatFunction (gameInfos.currentPlayer, getEventEnemies(currentEvent))
 				endif
 				
 				removeEvent(currentEvent)
@@ -359,11 +368,11 @@ function archive (typeIndex as integer, info as String[])
 		endcase
 		
 		case 3
-			WriteLine(file, "Include item (" + info[0] + " - " + info[1] + ") for player.")
+			WriteLine(file, "Include item (" + info[0] + " - " + info[1] + " [of index: " + info[2] + "]) for player.")
 		endcase
 		
 		case 4
-			WriteLine(file, "Include ability (" + info[0] + " - " + info[1] + ") for player.")
+			WriteLine(file, "Include ability (" + info[0] + " - " + info[1] + " [of index: " + info[2] + "]) for player.")
 		endcase
 		
 	endselect
@@ -537,3 +546,72 @@ function printMenu (currentPlayer as playerStatus)
 	
 	
 endfunction
+
+function combatFunction (player as playerStatus, enemies as enemyStatus[])
+	
+	flag = 0
+	
+	while ( player.remainingHP > 0 and flag < 1 )
+		DeleteAllText()
+		
+		aux = -1
+		
+		for k = 0 to enemies.length
+			if enemies[k].remainingHP = 0
+				aux = aux + 1
+			endif
+		next k
+		
+		if aux = enemies.length
+			flag = 1
+		endif
+		
+		//player
+		namePlayer = CreateText(player.name)
+		SetTextSize(namePlayer, 40)
+		SetTextPosition(namePlayer, 0, 0)
+		SetTextMaxWidth(namePlayer, 450)
+		
+		HPPlayer = CreateText("HP: " + Str(player.remainingHP) + " / Deffense: " + Str(player.deffense))
+		SetTextSize(HPPlayer, 40)
+		SetTextPosition(HPPlayer, 0, 50)
+		
+		attackPlayer = CreateText( getAttackName(player.attackValue) )
+		SetTextSize(attackPlayer, 40)
+		SetTextPosition(attackPlayer, 0, 120)
+		SetTextMaxWidth(attackPlayer, 450)
+		
+		attackValuePlayer = CreateText ( "Damage: " + Str(getAttackDamage(player.attackValue)) )
+		SetTextSize(attackValuePlayer, 40)
+		SetTextPosition(attackValuePlayer, 0, 200)
+		
+		modifierPlayer = CreateText ( "Modifier: " + Str(player.modifier))
+		SetTextSize(modifierPlayer, 40)
+		SetTextPosition(modifierPlayer, 0, 240)
+		
+		//enemies
+		for k = 0 to enemies.length
+			
+			position = 1 * (k*150)
+			
+			CreateText (26*(k+1), enemies[k].name)
+			SetTextSize(26*(k+1), 40)
+			SetTextPosition(26*(k+1), 520, position)		
+			
+			CreateText(27*(k+1), "HP: " + Str(enemies[k].remainingHP) + " / Deffense: " + Str(enemies[k].deffense))
+			SetTextSize(27*(k+1), 40)
+			SetTextPosition(27*(k+1), 520, position + 40)
+			
+			talk = Random(0, enemies[k].talksList.length)
+			CreateText(28*(k+1), enemies[k].talksList[talk])
+			SetTextSize(28*(k+1), 40)
+			SetTextPosition(28*(k+1), 520, position + 80)
+			SetTextMaxWidth(28*(k+1), 450)
+			
+		next k
+		
+		Sync()
+		
+	endwhile
+	
+endfunction player

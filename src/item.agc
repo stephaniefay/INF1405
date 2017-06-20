@@ -42,3 +42,12 @@ endfunction itemLst[index]
 
 function getAllItems ()
 endfunction itemLst
+
+function getItemNameByItem (newItem as itemStatus)
+endfunction newItem.name
+
+function getItemDescByItem (newItem as itemStatus)
+endfunction newItem.desc
+
+function getItemIndexByItem (newItem as itemStatus)
+endfunction newItem.index

@@ -76,3 +76,6 @@ endfunction eventLst[index].index
 
 function getEventAux (index as integer)
 endfunction eventLst[index].eventAux
+
+function getEventEnemies (index as integer)
+endfunction eventLst[index].enemyHolder

@@ -4,7 +4,7 @@
 SetErrorMode(2)
 
 // set window properties
-SetWindowTitle( "INF1405" )
+SetWindowTitle( "A New Adventure" )
 SetWindowSize( 1024, 768, 0 )
 SetWindowAllowResize( 1 ) // allow the user to resize the window
 

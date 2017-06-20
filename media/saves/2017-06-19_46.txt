@@ -67,9 +67,7 @@ Opção 1
 Opção 2
 Opção 3
 Opção 4
-3
-0
-0
+1
 0
 1
 2
@@ -77,15 +75,13 @@ Opção 4
 0
 0 1
 1
-1
+0
 Descrição do evento teste2
 Opção 1
 Opção 2
 Opção 3
 Opção 4
-3
-0
-0
+1
 0
 1
 2
@@ -102,9 +98,7 @@ Opção 1
 Opção 2
 Opção 3
 Opção 4
-3
-0
-0
+1
 0
 1
 2
@@ -118,15 +112,13 @@ Opção 4
 2
 0 1
 1
-2
+0
 Descrição do evento teste4
 Opção 1
 Opção 2
 Opção 3
 Opção 4
-3
-0
-0
+1
 0
 1
 2
@@ -143,15 +135,13 @@ Opção 4
 3
 0 1
 1
-0
+1
 Descrição do evento teste5
 Opção 1
 Opção 2
 Opção 3
 Opção 4
-3
-0
-0
+1
 0
 1
 2
@@ -197,6 +187,31 @@ Nome do Ataque Teste do Personagem
 1
 10
 ==============================================
+Event: Descrição do evento teste2 - 1
+==============================================
+Answer: Opção 1
+==============================================
+Include item (Nome do Item Teste 1 - Descrição do item teste [of index: 0]) for player.
+==============================================
+Event: Descrição do evento teste3 - 2
+==============================================
+Answer: Opção 1
+==============================================
+Include item (Nome do Item Teste 4 - Descrição do item teste [of index: 3]) for player.
+==============================================
 Event: Descrição do evento teste4 - 3
 ==============================================
-Answer: Opção 2
+Answer: Opção 1
+==============================================
+Include item (Nome do Item Teste 1 - Descrição do item teste [of index: 0]) for player.
+==============================================
+Event: Descrição do evento teste1 - 0
+==============================================
+Answer: Opção 1
+==============================================
+Event: Descrição do evento teste5 - 4
+==============================================
+Answer: Opção 1
+==============================================
+Include item (Nome do Item Teste 2 - Descrição do item teste [of index: 1]) for player.
+

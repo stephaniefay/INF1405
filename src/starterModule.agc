@@ -551,6 +551,8 @@ function combatFunction (player as playerStatus, enemies as enemyStatus[])
 	
 	flag = 0
 	
+	turn = Random(0, 1)
+	
 	while ( player.remainingHP > 0 and flag < 1 )
 		DeleteAllText()
 		
@@ -589,6 +591,10 @@ function combatFunction (player as playerStatus, enemies as enemyStatus[])
 		SetTextSize(modifierPlayer, 40)
 		SetTextPosition(modifierPlayer, 0, 240)
 		
+		attack = CreateText ( "Atacar!" )
+		SetTextSize(attack, 45)
+		SetTextPosition(attack, 20, 280)
+		
 		//enemies
 		for k = 0 to enemies.length
 			
@@ -609,6 +615,62 @@ function combatFunction (player as playerStatus, enemies as enemyStatus[])
 			SetTextMaxWidth(28*(k+1), 450)
 			
 		next k
+		
+		k = 0
+		
+		select turn
+				
+			case 0 //player
+				
+				
+				while attention = 0
+					
+					if GetTextHitTest(attack, GetPointerX(), GetPointerY()) and GetPointerPressed() = 1
+						attention = 1
+					endif
+					
+					Sync()
+					
+				endwhile
+				
+				k = 0
+				turn = 1
+				attention = 0
+						
+			endcase
+			
+			case 1 // enemies
+				
+				aux = getEnemyDamageDone(k)
+				player = updateCharacterDamageTaken(player, aux)
+
+				if attention = 1
+					if GetPointerPressed() = 1
+						if k < enemies.length
+							k = k + 1
+						else
+							turn = 0
+						endif
+					endif
+				endif
+
+				while attention = 0
+					
+					if GetPointerPressed() = 1
+						attention = 1
+						
+					else
+						attention = 0
+
+					endif
+					
+					Sync()
+
+				endwhile 
+				
+			endcase
+		
+		endselect
 		
 		Sync()
 		

@@ -132,3 +132,10 @@ function updateCharacterItem (newItem as itemStatus)
 	player.itemList.insert(newItem)
 
 endfunction	
+
+function updateCharacterDamageTaken (player as playerStatus, damage as integer)
+	
+	player.remainingHP = player.remainingHP - (damage - player.deffense)
+	
+endfunction player
+	

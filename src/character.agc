@@ -67,6 +67,10 @@ function getCharacterDamageDealt ()
 	
 endfunction (player.attackValue.damage * player.modifier)
 
+function getCharacterItems ()
+
+endfunction player.itemList
+
 //update info 
 
 function updateCharacterHP (newHP as integer)

@@ -252,7 +252,7 @@ function gameSequence (gameInfos as gameStructure)
 				endif
 			
 			else	
-				printMenu(gameInfos)
+				printMenu(gameInfos.currentPlayer)
 				flag = writeOnScreen(getEventDesc(currentEvent))
 				
 				temp.insert(getEventDesc(currentEvent))
@@ -517,18 +517,22 @@ function copyArchive ()
 	
 endfunction
 
-function printMenu (gameInfos as gameStructure)
-	name = CreateText("Name: " + gameInfos.currentPlayer.name)
+function printMenu (currentPlayer as playerStatus)
+	name = CreateText("Name: " + currentPlayer.name)
 	SetTextSize(name, 20)
 	SetTextPosition(name, 0, 0)
-	HP = CreateText("HP: " + Str(gameInfos.currentPlayer.remainingHP))
+	HP = CreateText("HP: " + Str(currentPlayer.remainingHP))
 	SetTextSize(HP, 20)
 	SetTextPosition(HP, 300, 0)
 	
-	for k = 0 to gameInfos.currentPlayer.itemList.length
-		CreateText(24+k, gameInfos.currentPlayer.itemList[k].name)
+	aux as itemStatus[]
+	aux = getCharacterItems()
+	
+	for k = 0 to aux.length
+		temp$ = getItemName(aux[k].index)
+		CreateText(24+k, temp$)
 		SetTextSize(24+k, 15)
-		SetTextPosition(24+k, 0, 1 * (k*10))
+		SetTextPosition(24+k, 800, 1 * (k*10))
 	next k
 	
 	

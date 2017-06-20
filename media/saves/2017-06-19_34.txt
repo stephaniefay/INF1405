@@ -61,7 +61,7 @@ Descrição do item teste
 ==============================================
 1 3
 1
-0
+2
 Descrição do evento teste1
 Opção 1
 Opção 2
@@ -75,7 +75,7 @@ Opção 4
 0
 0 1
 1
-0
+1
 Descrição do evento teste2
 Opção 1
 Opção 2
@@ -92,7 +92,7 @@ Opção 4
 1
 0 1
 1
-2
+3
 Descrição do evento teste3
 Opção 1
 Opção 2
@@ -112,7 +112,7 @@ Opção 4
 2
 0 1
 1
-1
+3
 Descrição do evento teste4
 Opção 1
 Opção 2
@@ -135,7 +135,7 @@ Opção 4
 3
 0 1
 1
-2
+1
 Descrição do evento teste5
 Opção 1
 Opção 2
@@ -187,11 +187,7 @@ Nome do Ataque Teste do Personagem
 1
 10
 ==============================================
-Event: Descrição do evento teste5 - 4
-==============================================
-Answer: Opção 1
-==============================================
-Event: Descrição do evento teste1 - 0
+Event: Descrição do evento teste2 - 1
 ==============================================
 Answer: Opção 1
 ==============================================
@@ -199,10 +195,15 @@ Event: Descrição do evento teste3 - 2
 ==============================================
 Answer: Opção 1
 ==============================================
-Event: Descrição do evento teste2 - 1
+Event: Descrição do evento teste1 - 0
 ==============================================
 Answer: Opção 1
 ==============================================
 Event: Descrição do evento teste4 - 3
 ==============================================
 Answer: Opção 1
+==============================================
+Event: Descrição do evento teste5 - 4
+==============================================
+Answer: Opção 1
+

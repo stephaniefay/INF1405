@@ -251,7 +251,8 @@ function gameSequence (gameInfos as gameStructure)
 					attention = 0
 				endif
 			
-			else
+			else	
+				printMenu(gameInfos)
 				flag = writeOnScreen(getEventDesc(currentEvent))
 				
 				temp.insert(getEventDesc(currentEvent))
@@ -280,8 +281,6 @@ function gameSequence (gameInfos as gameStructure)
 				SetTextSize(i, 40)
 				SetTextPosition(i, 20, position+(50*i))
 			next i
-			removeEvent(currentEvent)
-			gameInfos.allEvents = getAllEvents()
 			aux = 3
 		endcase
 		case 3
@@ -302,6 +301,23 @@ function gameSequence (gameInfos as gameStructure)
 				archive(2, temp)
 				temp.remove()
 				
+				tempEvent as String[]
+				tempEvent = getEventAux(currentEvent)
+				
+				if Val(tempEvent[0]) = hitText
+					tempItem as ItemStatus[]
+					tempItem = getEventItems(currentEvent)
+					for j = 0 to tempItem.length
+						updateCharacterItem(tempItem[j])
+					next j
+				endif
+				
+				if Val(tempEvent[1]) = hitText
+					//inimigos
+				endif
+				
+				removeEvent(currentEvent)
+				gameInfos.allEvents = getAllEvents()
 				aux = 0
 			endif
 			
@@ -416,7 +432,9 @@ function inicializeArchive (info as gameStructure)
 	
 	for i = 0 to info.allEvents.length
 		
-		WriteLine(fileTemp, info.allEvents[i].hasItem)
+		temp$ = info.allEvents[i].eventAux[0] + " " + info.allEvents[i].eventAux[1]
+		WriteLine(filetemp, temp$)
+
 		WriteLine(fileTemp, Str(info.allEvents[i].itemQtd))
 		
 		for j = 0 to info.allEvents[i].itemList.length
@@ -499,3 +517,19 @@ function copyArchive ()
 	
 endfunction
 
+function printMenu (gameInfos as gameStructure)
+	name = CreateText("Name: " + gameInfos.currentPlayer.name)
+	SetTextSize(name, 20)
+	SetTextPosition(name, 0, 0)
+	HP = CreateText("HP: " + Str(gameInfos.currentPlayer.remainingHP))
+	SetTextSize(HP, 20)
+	SetTextPosition(HP, 300, 0)
+	
+	for k = 0 to gameInfos.currentPlayer.itemList.length
+		CreateText(24+k, gameInfos.currentPlayer.itemList[k].name)
+		SetTextSize(24+k, 15)
+		SetTextPosition(24+k, 0, 1 * (k*10))
+	next k
+	
+	
+endfunction

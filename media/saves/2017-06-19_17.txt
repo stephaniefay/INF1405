@@ -28,23 +28,16 @@ Habilidade Teste
 Descrição da Habilidade Teste
 0
 ==============================================
-Nome do Item Teste 1
+Nome do Item Teste
 0
 2
 Descrição do item teste
 0
 0
-Nome do Item Teste 2
-0
-2
-Descrição do item teste
-0
-0
-1
 ==============================================
 1 3
 1
-1
+0
 Descrição do evento teste1
 Opção 1
 Opção 2
@@ -94,15 +87,18 @@ Begin of the gameplay:
 ==============================================
 Character: 
 10
-Nome do Personagem Teste2
+Nome do Personagem Teste1
 Descrição do Personagem Teste
 10
 Nome do Ataque Teste do Personagem
 1
 10
 ==============================================
-Event: Descrição do evento teste2 - 1
+Event: Descrição do evento teste1 - 0
 ==============================================
 Answer: Opção 1
 ==============================================
-Event: Descrição do evento teste1 - 0
+Event: Descrição do evento teste2 - 1
+==============================================
+Answer: Opção 2
+

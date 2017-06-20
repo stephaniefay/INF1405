@@ -100,7 +100,7 @@ function updateCharacterAbility (newAbility as abilityStatus)
 	
 	for i = 0 to player.abilityList.length
 		if getAbilityName(newAbility) = player.abilityList[i].name
-			return
+			exitfunction
 		endif
 	next i
 	
@@ -115,9 +115,12 @@ endfunction
 
 function updateCharacterItem (newItem as itemStatus)
 
+	temp1$ = newItem.name
+
 	for i = 0 to player.itemList.length
+		temp2$ = player.itemList[i].name
 		if newItem.name = player.itemList[i].name
-			return
+			exitfunction
 		endif
 	next i
 

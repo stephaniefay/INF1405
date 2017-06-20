@@ -155,15 +155,15 @@ function getInfo ()
 					options.insert(ReadLine(file))
 				next k
 				
-				eventAux.remove()
-				eventAux.remove()
-				eventAux.remove()
+				if eventAux.length > -1
+					eventAux.remove()
+					eventAux.remove()
+				endif
 				
 				temp$ = ReadLine(file)
 				
 				eventAux.insert(mid(temp$,1, 1))
 				eventAux.insert(mid(temp$,3, 1))
-				eventAux.insert(mid(temp$,5,1))
 				
 				qtdEnemy = Val(ReadLine(file))
 

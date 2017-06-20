@@ -5,7 +5,7 @@ function createEvent (eventAux as String[], itemQtd as integer, itemList as item
 	
 	newEvent as eventStatus
 	
-	newEvent.eventAux = eventAux
+	newEvent.eventAux = eventAux  //[0] is for items [1] is for enemies
 	newEvent.itemQtd = itemQtd
 	newEvent.itemList = itemList
 	newEvent.desc = desc

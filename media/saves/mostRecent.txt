@@ -76,7 +76,7 @@ Iniciar Combate
 0
 0 1
 1
-2
+3
 Descrição do evento teste2
 Pegar os Itens
 Iniciar Combate
@@ -103,8 +103,8 @@ Opção 3
 Opção 4
 3
 0
-1
 0
+1
 1
 2
 3
@@ -117,14 +117,14 @@ Opção 4
 2
 0 1
 1
-1
+2
 Descrição do evento teste4
 Pegar os Itens
 Iniciar Combate
 Opção 3
 Opção 4
 3
-1
+0
 0
 0
 1
@@ -142,7 +142,7 @@ Opção 4
 3
 0 1
 1
-1
+3
 Descrição do evento teste5
 Pegar os Itens
 Iniciar Combate
@@ -151,7 +151,7 @@ Opção 4
 3
 1
 1
-1
+0
 1
 2
 3
@@ -223,8 +223,10 @@ Event: Descrição do evento teste2 - 1
 ==============================================
 Answer: Iniciar Combate
 ==============================================
-Event: Descrição do evento teste5 - 4
+Battle: Enemies (Nome do Inimigo Teste, Nome do Inimigo Teste, Nome do Inimigo Teste [of indexes: 0, 0, 1]), first turn for: Enemies.
 ==============================================
-Answer: Iniciar Combate
+Battle Damage: Nome do Inimigo Teste [index: 0] attacks with 10 of damage.
 ==============================================
-Event: Descrição do evento teste4 - 3
+Battle Damage: Nome do Inimigo Teste [index: 0] attacks with 10 of damage.
+==============================================
+Battle Damage: Nome do Inimigo Teste [index: 1] attacks with 10 of damage.

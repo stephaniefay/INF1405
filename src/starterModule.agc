@@ -323,9 +323,23 @@ function gameSequence (gameInfos as gameStructure)
 				
 				if Val(tempEvent[1]) = hitText
 					gameInfos.currentPlayer = combatFunction (gameInfos.currentPlayer, getEventEnemies(currentEvent))
+					if gameInfos.currentPlayer.remainingHP <= 0
+						for k = 0 to gameInfos.allEvents.length
+							removeEvent(k)
+						next k
+						gameInfos.allEvents = getAllEvents()
+						aux = 1
+						
+						temp.insert("The player has died.")
+						archive(7, temp)
+						temp.remove()
+												
+					endif
 				endif
 				
-				removeEvent(currentEvent)
+				if gameInfos.allEvents.length >= 0
+					removeEvent(currentEvent)
+				endif
 				gameInfos.allEvents = getAllEvents()
 				aux = 0
 			endif
@@ -373,6 +387,18 @@ function archive (typeIndex as integer, info as String[])
 		
 		case 4
 			WriteLine(file, "Include ability (" + info[0] + " - " + info[1] + " [of index: " + info[2] + "]) for player.")
+		endcase
+		
+		case 5
+			WriteLine(file, "Battle: Enemies (" + info [0] + " [of indexes: " + info[1] + "]), first turn for: " + info[2] + ".")
+		endcase
+		
+		case 6
+			WriteLine(file, "Battle Damage: " + info[0] + " attacks with " + info[1] + " of damage.")
+		endcase
+		
+		case 7
+			WriteLine(file, info[0])
 		endcase
 		
 	endselect
@@ -553,6 +579,29 @@ function combatFunction (player as playerStatus, enemies as enemyStatus[])
 	
 	turn = Random(0, 1)
 	
+	//archive
+	temp as String[]
+	for k = 0 to enemies.length
+		if k = 0
+			t$ = enemies[k].name
+			i$ = Str(enemies[k].index)
+		else
+			t$ = t$ + ", " + enemies[k].name
+			i$ = i$ + ", " + Str(enemies[k].index)
+		endif
+	next k
+	temp.insert(t$)
+	temp.insert(i$)
+	if turn = 0
+		temp.insert("Player")
+	else
+		temp.insert("Enemies")
+	endif
+	archive(5, temp)
+	temp.remove()
+	temp.remove()
+	temp.remove()
+	
 	while ( flag < 1 )
 		DeleteAllText()
 		
@@ -642,6 +691,13 @@ function combatFunction (player as playerStatus, enemies as enemyStatus[])
 				for k = 0 to enemies.length
 					enemies[k] = getEnemyDamageTaken(enemies[k], getCharacterDamageDealt())
 				next k
+				
+				temp.insert("Player")
+				dPlayer = getCharacterDamageDealt()
+				temp.insert(Str(dPlayer))
+				archive(6, temp)
+				temp.remove()
+				temp.remove()
 
 				counter = 0
 				turn = 1
@@ -673,6 +729,14 @@ function combatFunction (player as playerStatus, enemies as enemyStatus[])
 
 				aux = getEnemyDamageDone(enemies[counter].index)
 				player = updateCharacterDamageTaken(player, aux)
+				
+				temp.insert(enemies[counter].name + " [index: " + Str(enemies[counter].index) + "]")
+				temp.insert(Str(aux))
+				archive(6, temp)
+				temp.remove()
+				temp.remove()
+
+				
 				attention = 0
 
 				while attention = 0

@@ -1,0 +1,228 @@
+40
+Nome do Personagem Teste1
+Descrição do Personagem Teste
+1
+10
+Nome do Ataque Teste do Personagem
+5
+10
+Nome do Personagem Teste2
+Descrição do Personagem Teste
+1
+10
+Nome do Ataque Teste do Personagem
+10
+10
+Nome do Personagem Teste3
+Descrição do Personagem Teste
+1
+10
+Nome do Ataque Teste do Personagem
+10
+==============================================
+Habilidade Teste
+10
+10
+10
+2
+Descrição da Habilidade Teste
+0
+==============================================
+Nome do Item Teste 1
+0
+2
+Descrição do item teste
+event: 0
+0
+Nome do Item Teste 2
+0
+2
+Descrição do item teste
+event: 0
+1
+Nome do Item Teste 3
+0
+2
+Descrição do item teste
+event: 0
+2
+Nome do Item Teste 4
+0
+2
+Descrição do item teste
+event: 0
+3
+==============================================
+1 3
+item: 3
+Descrição do evento teste1
+answer: Opção 1
+answer: Pegar os Itens
+answer: Opção 3
+answer: Iniciar Combate
+enemy: 0
+enemy: 0
+scene: 1
+scene: 2
+0
+0 1
+item: 2
+Descrição do evento teste2
+answer: Pegar os Itens
+answer: Iniciar Combate
+answer: Opção 3
+answer: Opção 4
+enemy: 0
+enemy: 0
+enemy: 0
+scene: 1
+scene: 2
+scene: 3
+1
+0 1
+item: 3
+Descrição do evento teste3
+answer: Pegar os Itens
+answer: Iniciar Combate
+answer: Opção 3
+answer: Opção 4
+enemy: 0
+enemy: 1
+enemy: 0
+scene: 2
+scene: 3
+2
+0 1
+item: 2
+Descrição do evento teste4
+answer: Pegar os Itens
+answer: Iniciar Combate
+answer: Opção 3
+answer: Opção 4
+enemy: 0
+enemy: 1
+enemy: 1
+scene: 2
+scene: 3
+3
+0 1
+item: 3
+Descrição do evento teste5
+answer: Pegar os Itens
+answer: Iniciar Combate
+answer: Opção 3
+answer: Opção 4
+enemy: 0
+enemy: 1
+enemy: 0
+scene: 2
+scene: 1
+4
+==============================================
+scene: 1
+scene: 2
+scene: 3
+10
+1
+Nome do Inimigo Teste
+Descrição do Inimigo teste
+attack: 10
+Ataque 1
+attack: 20
+Ataque 2
+talks: Fala 1
+talks: Fala 2
+10
+0
+scene: 1
+scene: 2
+scene: 3
+20
+1
+Nome do Inimigo Teste
+Descrição do Inimigo teste
+attack: 10
+Ataque 1
+attack: 20
+Ataque 2
+talks: Fala 1
+talks: Fala 2
+10
+1
+==============================================
+Begin of the gameplay: 
+==============================================
+Character: 
+0
+40
+Nome do Personagem Teste1
+Descrição do Personagem Teste
+10
+Nome do Ataque Teste do Personagem
+1
+5
+==============================================
+Event: Descrição do evento teste1 - 0
+==============================================
+Answer: Iniciar Combate
+==============================================
+Battle: Enemies (Nome do Inimigo Teste, Nome do Inimigo Teste [of indexes: 0, 0]), first turn for: Player.
+==============================================
+Battle Damage: Player attacks with 10 of damage.
+==============================================
+Event: Descrição do evento teste2 - 1
+==============================================
+Answer: Iniciar Combate
+==============================================
+Battle: Enemies (Nome do Inimigo Teste, Nome do Inimigo Teste, Nome do Inimigo Teste [of indexes: 0, 0, 0]), first turn for: Player.
+==============================================
+Battle Damage: Player attacks with 10 of damage.
+==============================================
+Changed to next scene.
+==============================================
+Event: Descrição do evento teste5 - 4
+==============================================
+Answer: Iniciar Combate
+==============================================
+Battle: Enemies (Nome do Inimigo Teste, Nome do Inimigo Teste, Nome do Inimigo Teste [of indexes: 0, 1, 0]), first turn for: Enemies.
+==============================================
+Battle Damage: Nome do Inimigo Teste [index: 0] attacks with 10 of damage.
+==============================================
+Battle Damage: Nome do Inimigo Teste [index: 1] attacks with 10 of damage.
+==============================================
+Battle Damage: Nome do Inimigo Teste [index: 0] attacks with 10 of damage.
+==============================================
+Battle Damage: Player attacks with 10 of damage.
+==============================================
+Battle Damage: Nome do Inimigo Teste [index: 1] attacks with 10 of damage.
+==============================================
+Deceased: The Nome do Inimigo Teste [index: 0] has died.
+==============================================
+Deceased: The Nome do Inimigo Teste [index: 0] has died.
+==============================================
+Battle Damage: Nome do Inimigo Teste [index: 0] attacks with 10 of damage.
+==============================================
+Deceased: The Nome do Inimigo Teste [index: 0] has died.
+==============================================
+Deceased: The Nome do Inimigo Teste [index: 0] has died.
+==============================================
+Battle Damage: Player attacks with 10 of damage.
+==============================================
+Event: Descrição do evento teste2 - 1
+==============================================
+Answer: Iniciar Combate
+==============================================
+Battle: Enemies (Nome do Inimigo Teste, Nome do Inimigo Teste, Nome do Inimigo Teste [of indexes: 0, 0, 0]), first turn for: Player.
+==============================================
+Battle Damage: Player attacks with 10 of damage.
+==============================================
+Changed to next scene.
+==============================================
+Event: Descrição do evento teste2 - 1
+==============================================
+Answer: Iniciar Combate
+==============================================
+Battle: Enemies (Nome do Inimigo Teste, Nome do Inimigo Teste, Nome do Inimigo Teste [of indexes: 0, 0, 0]), first turn for: Player.
+==============================================
+Battle Damage: Player attacks with 10 of damage.
+

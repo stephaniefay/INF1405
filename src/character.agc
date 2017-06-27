@@ -1,4 +1,6 @@
 global player as playerStatus
+global playerLst as playerStatus[]
+global lastIndexCharacter as integer
 
 //Declare player
 
@@ -49,6 +51,11 @@ function createPlayer (absoluteHP as integer, itemList as itemStatus[], abilityL
 	for j = 0 to itemList.length
 		newCharacter.remainingHP = newCharacter.remainingHP + getItemDamage(itemList[i].index)
 	next j
+	
+	newCharacter.index = lastIndexCharacter
+	lastIndexCharacter = lastIndexCharacter+1
+	
+	playerLst.insert(newCharacter)
 
 endfunction newCharacter
 
@@ -144,3 +151,25 @@ function updateCharacterDamageTaken (player as playerStatus, damage as integer)
 	
 endfunction player
 	
+function updatedIndexesPlayer (players as playerStatus[])
+	
+	for k = 0 to players.length
+		for j = 0 to players[k].abilitiesIndex.length
+			players[k].attackValue = createAttack(getAttackDamage(players[k].attackValue) + getAbilityAttack(getAbility(players[k].abilitiesIndex[j])), getAttackName(players[k].attackValue))
+			players[k].modifier = players[k].modifier + getAbilityModifier(getAbility(players[k].abilitiesIndex[j]))
+			players[k].deffense = players[k].deffense + getAbilityDeffense(getAbility(players[k].abilitiesIndex[j]))
+			players[k].absoluteHP = players[k].absoluteHP + getAbilityHP(getAbility(players[k].abilitiesIndex[j]))
+			players[k].remainingHP = players[k].remainingHP + getAbilityHP(getAbility(players[k].abilitiesIndex[j]))
+			players[k].abilityList.insert(getAbility(players[k].abilitiesIndex[j]))
+		next j
+		
+		for j = 0 to players[k].itemsIndex.length
+			players[k].itemList.insert(getItem(players[k].itemsIndex[j]))
+		next j
+	next k
+	
+	
+endfunction players
+
+function getCharacter (index as integer)
+endfunction playerLst[index]

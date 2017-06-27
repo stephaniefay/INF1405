@@ -57,3 +57,13 @@ function insertItemLstofIndexes (index as integer, lst as integer[])
 	itemLst[index].eventsIndex = lst
 
 endfunction
+
+function updatedIndexesItems ()
+	
+	for k = 0 to itemLst.length
+		for j = 0 to itemLst[k].eventsIndex.length
+			itemLst[k].eventHolder.insert(getEvent(itemLst[k].eventsIndex[j]))
+		next j
+	next k
+
+endfunction

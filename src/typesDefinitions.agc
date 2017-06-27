@@ -25,6 +25,8 @@ Type playerStatus
 	
 	deffense as integer
 	
+	index as integer
+	
 	itemsIndex as integer[]
 	
 	abilitiesIndex as integer[]

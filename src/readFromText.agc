@@ -1,3 +1,4 @@
+global ret$
 
 function getInfo () 
 	
@@ -288,7 +289,7 @@ function ChooseFile()
 	if ret$=""
 		exitfunction gameInfos
 	else
-		file = OpenToRead("saves\" + ret$)
+		file = OpenToRead("raw:" + GetDocumentsPath() + "\A New Adventure\media\saves\" + ret$)
 
 		players as playerStatus[]
 		tempIndexes1 as integer[]
@@ -320,7 +321,7 @@ function ChooseFile()
 			
 			temp$ = ReadLine(file)
 			while FindString(temp$, "item:") > 0
-				temp$ = StripString(temp$, "item: ")
+				temp$ = ReplaceString(temp$, "item: ", "", 1)
 				tempIndexes1.insert(Val(temp$))
 				temp$ = ReadLine(file)
 			endwhile
@@ -330,7 +331,7 @@ function ChooseFile()
 			endwhile
 			
 			while FindString(temp$, "ability:") > 0
-				temp$ = StripString(temp$, "ability: ")
+				temp$ = ReplaceString(temp$, "ability: ", "", 1)
 				tempIndexes2.insert(Val(temp$))
 				temp$ = ReadLine(file)
 			endwhile
@@ -396,7 +397,6 @@ function ChooseFile()
 				nameItem = r$
 			endif
 
-			nameItem = ReadLine(file)
 			abilityIndexItem = Val(ReadLine(file))
 			damageItem = Val(ReadLine(file))
 			descItem = ReadLine(file)
@@ -407,7 +407,7 @@ function ChooseFile()
 			
 			temp$ = ReadLine(file)
 			while FindString(temp$, "event:") > 0
-				temp$ = StripString(temp$, "event: ")
+				temp$ = ReplaceString(temp$, "event: ", "", 1)
 				tempIndexes1.insert(Val(temp$))
 				temp$ = ReadLine(file)
 			endwhile
@@ -450,7 +450,7 @@ function ChooseFile()
 			
 			temp$ = ReadLine(file)
 			while FindString(temp$, "item:") > 0
-				temp$ = StripString(temp$, "item: ")
+				temp$ = ReplaceString(temp$, "item: ", "", 1)
 				tempIndexes1.insert(Val(temp$))
 				temp$ = ReadLine(file)	
 			endwhile
@@ -463,7 +463,7 @@ function ChooseFile()
 			
 			temp$ = ReadLine(file)
 			while FindString(temp$, "answer:") > 0
-				temp$ = StripString(temp$, "answer: ")
+				temp$ = ReplaceString(temp$, "answer: ", "", 1)
 				optionsEvent.insert(temp$)
 				temp$ = ReadLine(file)
 			endwhile
@@ -473,7 +473,7 @@ function ChooseFile()
 			endwhile
 			
 			while FindString(temp$, "enemy:") > 0
-				temp$ = StripString(temp$, "enemy: ")
+				temp$ = ReplaceString(temp$, "enemy: ", "", 1)
 				tempIndexes2.insert(Val(temp$))
 				temp$ = ReadLine(file)
 			endwhile
@@ -483,7 +483,7 @@ function ChooseFile()
 			endwhile
 				
 			while FindString(temp$, "scene:") > 0
-				temp$ = StripString(temp$, "scene: ")
+				temp$ = ReplaceString(temp$, "scene: ", "", 1)
 				scenesEvent.insert(Val(temp$))
 				temp$ = ReadLine(file)
 			endwhile
@@ -521,7 +521,7 @@ function ChooseFile()
 			endif
 			
 			while FindString(temp$, "scene:") > 0
-				temp$ = StripString(temp$, "scene: ")
+				temp$ = ReplaceString(temp$, "scene: ", "", 1)
 				scenesEnemy.insert(Val(temp$))
 				temp$ = ReadLine(file)
 			endwhile
@@ -535,7 +535,7 @@ function ChooseFile()
 			
 			temp$ = ReadLine(file)
 			while FindString(temp$, "event:") > 0
-				temp$ = StripString(temp$, "event: ")
+				temp$ = ReplaceString(temp$, "event: ", "", 1)
 				tempIndexes1.insert(Val(temp$))
 				temp$ = ReadLine(file)
 			endwhile
@@ -549,7 +549,7 @@ function ChooseFile()
 			
 			temp$ = ReadLine(file)
 			while FindString(temp$, "attack:") > 0
-				temp$ = StripString(temp$, "attack: ")
+				temp$ = ReplaceString(temp$, "attack: ", "", 1)
 				attacksEnemy.insert(createAttack(Val(temp$), ReadLine(file)))
 				temp$ = ReadLine(file)
 			endwhile
@@ -559,7 +559,7 @@ function ChooseFile()
 			endwhile
 			
 			while FindString(temp$, "talks:") > 0
-				temp$ = StripString(temp$, "talks: ")
+				temp$ = ReplaceString(temp$, "talks: ", "", 1)
 				talksEnemy.insert(temp$)
 				temp$ = ReadLine(file)
 			endwhile
@@ -573,5 +573,43 @@ function ChooseFile()
 			
 		endwhile
 		
+		players = updatedIndexesPlayer(players)
+		updatedIndexesEvents()
+		updatedIndexesItems()
+		updatedIndexesEnemies()
+		
+		gameInfos.allAbilities = getAllAbilities()
+		gameInfos.allEnemies = getAllEnemies()
+		gameInfos.allEvents = getAllEvents()
+		gameInfos.allItems = getAllItems()
+		gameInfos.allPlayers = players
+		
+		offset$ = ReadLine(file)
+		offset$ = ReadLine(file)
+		offset$ = ReadLine(file)
+		offset$ = ReadLine(file)
+		
+		gameInfos.currentPlayer = getCharacter(Val(offset$))
+		
+		aux$ = gameInfos.currentPlayer.name
+		
 	endif
+	
 endfunction gameInfos
+
+function getOrderEvents ()
+
+	file = OpenToRead("raw:" + GetDocumentsPath() + "\A New Adventure\media\saves\" + ret$)
+	events as integer[]
+	
+	while FileEOF(file) = 0
+		r$ = ReadLine(file)
+		
+		if FindString(r$, "Event Happening:") > 0
+			events.insert(Val(StripString(r$, ": aAbBcCdDeEfgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZãç.-")))
+		endif
+		
+	endwhile
+
+endfunction events
+	

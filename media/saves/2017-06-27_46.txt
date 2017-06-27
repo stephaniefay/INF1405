@@ -54,67 +54,67 @@ event: 0
 3
 ==============================================
 1 3
-item: 2
-Descrição do evento teste
+item: 0
+Descrição do evento teste1
 answer: Opção 1
 answer: Pegar os Itens
 answer: Opção 3
 answer: Iniciar Combate
-enemy: 0
+enemy: 1
 enemy: 0
 scene: 1
 scene: 2
 0
 0 1
-item: 2
-Descrição do evento teste
+item: 0
+Descrição do evento teste2
 answer: Pegar os Itens
 answer: Iniciar Combate
 answer: Opção 3
 answer: Opção 4
 enemy: 0
-enemy: 1
 enemy: 0
+enemy: 1
 scene: 1
 scene: 2
 scene: 3
 1
 0 1
 item: 3
-Descrição do evento teste
+Descrição do evento teste3
 answer: Pegar os Itens
 answer: Iniciar Combate
 answer: Opção 3
 answer: Opção 4
-enemy: 0
-enemy: 0
 enemy: 1
+enemy: 0
+enemy: 0
 scene: 2
 scene: 3
 2
 0 1
-item: 2
-Descrição do evento teste
+item: 1
+Descrição do evento teste4
 answer: Pegar os Itens
 answer: Iniciar Combate
 answer: Opção 3
 answer: Opção 4
 enemy: 0
-enemy: 0
+enemy: 1
 enemy: 1
 scene: 2
 scene: 3
 3
 0 1
-item: 1
-Descrição do evento teste
+item: 3
+Descrição do evento teste5
 answer: Pegar os Itens
 answer: Iniciar Combate
 answer: Opção 3
 answer: Opção 4
+enemy: 0
+enemy: 0
 enemy: 1
-enemy: 0
-enemy: 0
 scene: 2
 scene: 1
 4
@@ -162,26 +162,31 @@ Nome do Ataque Teste do Personagem
 1
 5
 ==============================================
-Event Happening: Descrição do evento teste - 4
+Event Happening: Descrição do evento teste5 - 4
 ==============================================
-Answer: Opção 3
+Answer: Pegar os Itens
 ==============================================
-Event Happening: Descrição do evento teste - 1
+Include item (Nome do Item Teste 4 - Descrição do item teste [of index: 3]) for player.
 ==============================================
-Answer: Opção 3
+Event Happening: Descrição do evento teste2 - 1
 ==============================================
-Changed to next scene.
+Answer: Pegar os Itens
 ==============================================
-Event Happening: Descrição do evento teste - 0
-==============================================
-Answer: Opção 3
-==============================================
-Event Happening: Descrição do evento teste - 3
-==============================================
-Answer: Opção 3
+Include item (Nome do Item Teste 1 - Descrição do item teste [of index: 0]) for player.
 ==============================================
 Changed to next scene.
 ==============================================
-Event Happening: Descrição do evento teste - 2
+Event Happening: Descrição do evento teste4 - 3
 ==============================================
-Answer: Opção 3
+Answer: Pegar os Itens
+==============================================
+Include item (Nome do Item Teste 2 - Descrição do item teste [of index: 1]) for player.
+==============================================
+Event Happening: Descrição do evento teste3 - 2
+==============================================
+Answer: Pegar os Itens
+==============================================
+Include item (Nome do Item Teste 4 - Descrição do item teste [of index: 3]) for player.
+==============================================
+Changed to next scene.
+

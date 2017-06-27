@@ -169,14 +169,15 @@ function start ()
 				
 				// log of the character choosen
 				temp as String[]
+				temp.insert(Str(gameInfos.currentPlayer.index))
 				temp.insert(Str(gameInfos.currentPlayer.absoluteHP))
 				
 				for i = 0 to gameInfos.currentPlayer.itemList.length
-					temp.insert(Str(gameInfos.currentPlayer.itemList[i].index))
+					temp.insert("item: " + Str(gameInfos.currentPlayer.itemList[i].index))
 				next i
 				
 				for i = 0 to gameInfos.currentPlayer.abilityList.length
-					temp.insert(Str(gameInfos.currentPlayer.abilityList[i].index))
+					temp.insert("ability: " + Str(gameInfos.currentPlayer.abilityList[i].index))
 				next i
 				
 				temp.insert(gameInfos.currentPlayer.name)
@@ -394,7 +395,7 @@ function archive (typeIndex as integer, info as String[])
 		endcase
 		
 		case 1
-			WriteLine (file, "Event: " + info[0] + " - " + info[1])
+			WriteLine (file, "Event Happening: " + info[0] + " - " + info[1])
 		endcase
 		
 		case 2
@@ -877,12 +878,219 @@ endfunction player
 
 function load ()
 	
+		fireSprite1 = CreateSprite(LoadImageResized("startMenu\fire\fire (1).gif", 0.3, 0.3, 0))
+
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (1).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (2).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (3).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (4).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (5).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (6).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (7).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (8).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (9).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (10).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (11).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite1, LoadImageResized("startMenu\fire\fire (12).gif", 0.3, 0.3, 0) )
+	
+	fireSprite2 = CreateSprite(LoadImageResized("startMenu\fire\fire (1).gif", 0.3, 0.3, 0))
+
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (1).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (2).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (3).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (4).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (5).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (6).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (7).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (8).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (9).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (10).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (11).gif", 0.3, 0.3, 0) )
+	AddSpriteAnimationFrame ( fireSprite2, LoadImageResized("startMenu\fire\fire (12).gif", 0.3, 0.3, 0) )
+	
+	SetSpritePosition(fireSprite1, -250, -250)
+	SetSpritePosition(fireSprite2, -250, -250)
+	
 	historyInfo as gameStructure
 	historyInfo = ChooseFile()
 	
+	showInScreen as String
+	showInScreen = "Teste de narração, aqui vai a narração do jogo inicial, se for necessário mais de um quadro de narração é só gerenciar isso no if. Após toda a narração inicial, virá a escolha dos personagens. (Você pode passar a qualquer momento clicando com o mouse)"
+	aux = 0
+	flag = -1
+	position = 150
+	
 	do
-		//print(ret$)
+		if aux = 0
+			if flag < 0
+				flag = writeOnScreen(showInScreen)
+				if flag = 1
+					firstText = CreateText(showInScreen)
+					SetTextMaxWidth(firstText, 1004)
+					SetTextPosition(firstText, 20, 50)
+					SetTextSize(firstText, 50)
+
+					secondText = CreateText("Começar Jogo!")
+					SetTextPosition(secondText, 400, 400)
+					SetTextSize(secondText, 30)
+
+					flag = 2
+				endif
+			endif
+			
+			if GetTextHitTest(secondText, GetPointerX(), GetPointerY()) = 1 
+				if attention = 1 and GetPointerPressed() = 1
+					DeleteSprite(fireSprite1)
+					DeleteSprite(fireSprite2)
+					DeleteAllText()
+					
+					gameSequenceLoad(historyInfo)
+					
+				endif
+				
+				SetSpritePosition(fireSprite1, 380, 370)
+				SetSpritePosition(fireSprite2, 560, 370)
+				if GetSpritePlaying(fireSprite1) = 0 and GetSpritePlaying(fireSprite2) = 0
+					playSprite(fireSprite1)
+					playSprite(fireSprite2)
+				endif
+			else
+				SetSpritePosition(fireSprite1, -250, -250)
+				SetSpritePosition(fireSprite2, -250, -250)
+			endif
+
+			if GetPointerState() = 0
+				attention = 1
+			else
+				attention = 0
+			endif
+		endif
+		
 		Sync()
+	loop	
+endfunction
+
+
+function gameSequenceLoad (gameInfos as gameStructure) 
+	aux = 0
+	
+	currentEvent = -1
+	currentScene = 1
+	countdown = 2
+	
+	hitText = -1
+	attention = 0
+	
+	temp as String[]
+	eventsOrder as integer[] 
+	
+	eventsOrder = getOrderEvents()
+	
+	
+	do
+	SELECT aux
+		case 0
+			
+			if countdown = 0
+				currentScene = currentScene + 1
+				countdown = 2
+			endif
+			
+			if currentScene < 4
+				if eventsOrder.length = -1
+					currentScene = 4
+				else
+					currentEvent = eventsOrder[0]
+					countdown = countdown - 1
+				endif
+			endif			
+			
+			aux = 1
+		endcase
+		case 1
+			if gameInfos.allEvents.length = -1 or currentScene = 4
+				if gameInfos.currentPlayer.remainingHP <= 0
+					printGameOver(gameInfos.currentPlayer, 0)
+				else
+					printGameOver(gameInfos.currentPlayer, 1)
+				endif
+			else
+				printMenu(gameInfos.currentPlayer, currentScene)
+				flag = writeOnScreen(getEventDesc(currentEvent))
+
+				if flag = 1
+					event = CreateText(getEventDesc(currentEvent))
+					SetTextMaxWidth(event, 1004)
+					SetTextPosition(event, 20, 50)
+					SetTextSize(event, 50)
+					aux = 2
+				endif				
+			endif
+		endcase
+		case 2
+			options as String[]
+			options = getEventOptions(currentEvent)
+			position = 400
+			for i = 0 to options.length
+				CreateText(i, options[i])
+				SetTextSize(i, 40)
+				SetTextPosition(i, 20, position+(50*i))
+			next i
+			aux = 3
+		endcase
+		case 3
+			hitText = -1
+			
+			for j = 0 to i-1
+				if GetTextHitTest(j, GetPointerX(), GetPointerY())
+					if (attention = 1 and GetPointerState() = 1)
+						hitText = j
+					endif
+				endif
+			next j
+			
+			if hitText > -1
+				DeleteAllText()
+
+				tempEvent as String[]
+				tempEvent = getEventAux(currentEvent)
+				
+				if Val(tempEvent[0]) = hitText
+					tempItem as ItemStatus[]
+					tempItem = getEventItems(currentEvent)
+					for j = 0 to tempItem.length
+						updateCharacterItem(tempItem[j])
+					next j
+				endif
+				
+				if Val(tempEvent[1]) = hitText
+					gameInfos.currentPlayer = combatFunction (gameInfos.currentPlayer, getEventEnemies(currentEvent))
+					if gameInfos.currentPlayer.remainingHP <= 0
+						for k = 0 to gameInfos.allEvents.length
+							removeEvent(k)
+						next k
+						gameInfos.allEvents = getAllEvents()
+						aux = 1												
+					endif
+				endif
+				
+				if gameInfos.allEvents.length >= 0
+					removeEvent(currentEvent)
+					eventsOrder.remove(0)
+				endif
+				gameInfos.allEvents = getAllEvents()
+				aux = 0
+			endif
+			
+			if GetPointerState() = 0
+				attention = 1
+			else
+				attention = 0
+			endif
+			
+		endcase
+	endselect
+	Sync()
 	loop
 	
 endfunction

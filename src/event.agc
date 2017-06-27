@@ -194,3 +194,16 @@ function insertEventIndexes (index as integer, items as integer[], enemies as in
 
 endfunction
 	
+function updatedIndexesEvents ()
+	
+	for k = 0 to eventLst.length
+		for j = 0 to eventLst[k].enemiesIndex.length
+			eventLst[k].enemyHolder.insert(getEnemy(eventLst[k].enemiesIndex[j]))
+		next j
+		
+		for j = 0 to eventLst[k].itemsIndex.length
+			eventLst[k].itemList.insert(getItem(eventLst[k].itemsIndex[j]))
+		next j
+	next k
+
+endfunction

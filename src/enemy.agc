@@ -99,3 +99,13 @@ endfunction randomIndex
 function insertEventIndexesEnemy (index as integer, lst as integer[])
 	enemyLst[index].eventsIndex = lst
 endfunction
+
+function updatedIndexesEnemies ()
+	
+	for k = 0 to enemyLst.length
+		for j = 0 to enemyLst[k].eventsIndex.length
+			enemyLst[k].eventHolder.insert(getEvent(enemyLst[k].eventsIndex[j]))
+		next j
+	next k
+
+endfunction

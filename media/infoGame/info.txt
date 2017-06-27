@@ -11,7 +11,7 @@ Descrição da Habilidade Teste
 Events
 5
 1
-Descrição do evento teste1
+Descrição do evento teste
 4
 Opção 1
 Pegar os Itens
@@ -24,7 +24,7 @@ Iniciar Combate
 2
 ----------------------------------------------
 1
-Descrição do evento teste2
+Descrição do evento teste
 4
 Pegar os Itens
 Iniciar Combate
@@ -38,7 +38,7 @@ Opção 4
 3
 ----------------------------------------------
 1
-Descrição do evento teste3
+Descrição do evento teste
 4
 Pegar os Itens
 Iniciar Combate
@@ -51,7 +51,7 @@ Opção 4
 3
 ----------------------------------------------
 1
-Descrição do evento teste4
+Descrição do evento teste
 4
 Pegar os Itens
 Iniciar Combate
@@ -64,7 +64,7 @@ Opção 4
 3
 ----------------------------------------------
 1
-Descrição do evento teste5
+Descrição do evento teste
 4
 Pegar os Itens
 Iniciar Combate

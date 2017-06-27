@@ -169,6 +169,10 @@ function getInfo ()
 
 				count2 = Val(ReadLine(file))-1
 
+				while canAppearScene.length > -1
+					canAppearScene.remove()
+				endwhile
+
 				for k = 0 to count2
 					canAppearScene.insert(Val(ReadLine(file)))
 				next k
@@ -202,6 +206,10 @@ function getInfo ()
 					deffenseEnemy as integer
 					
 					count2 = Val(ReadLine(file))-1
+					
+					while typeScene.length > -1
+						typeScene.remove()
+					endwhile
 					
 					for k = 0 to count2
 						typeScene.insert(Val(ReadLine(file)))
@@ -246,6 +254,7 @@ function getInfo ()
 
 	updateAllEnemiesEvent()
 	updateAllItemsEvents()	
+	organizeEventByScene()
 
 	completeGame as gameStructure
 	completeGame.allAbilities = getAllAbilities()

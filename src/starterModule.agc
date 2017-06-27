@@ -220,7 +220,10 @@ endfunction
 
 function gameSequence (gameInfos as gameStructure) 
 	aux = 0
+	
 	currentEvent = -1
+	currentScene = 1
+	countdown = 2
 	
 	hitText = -1
 	attention = 0
@@ -230,11 +233,36 @@ function gameSequence (gameInfos as gameStructure)
 	do
 	SELECT aux
 		case 0
-			currentEvent = random (0, gameInfos.allEvents.length)
+			
+			if countdown = 0
+				currentScene = currentScene + 1
+				countdown = 2
+			endif
+			
+			if currentScene = 2 and countdown = 1
+				print("wow")
+			endif
+			
+			if currentScene < 4
+				lstScene as integer[]
+				lstScene = getEventByScenes(currentScene)
+				
+				if lstScene.length = -1
+					currentScene = 4
+				else
+					size = lstScene.length
+					rand = random(0, size)
+					currentEvent = lstScene[rand]
+					countdown = countdown - 1
+				endif
+			endif
+			
+			
+			
 			aux = 1
 		endcase
 		case 1
-			if gameInfos.allEvents.length = -1
+			if gameInfos.allEvents.length = -1 or currentScene = 4
 				print("Game Over")
 				
 				if GetFileExists("raw:" + GetDocumentsPath() + "\A New Adventure\media\saves\mostRecent.txt") = 1
@@ -252,11 +280,11 @@ function gameSequence (gameInfos as gameStructure)
 				endif
 			
 			else	
-				printMenu(gameInfos.currentPlayer)
+				printMenu(gameInfos.currentPlayer, currentScene)
 				flag = writeOnScreen(getEventDesc(currentEvent))
 				
 				temp.insert(getEventDesc(currentEvent))
-				temp.insert(Str(getEventIndex(currentEvent)))
+				temp.insert(Str(currentEvent))
 				
 				archive(1, temp)
 				
@@ -339,6 +367,7 @@ function gameSequence (gameInfos as gameStructure)
 				
 				if gameInfos.allEvents.length >= 0
 					removeEvent(currentEvent)
+					updateEventsByScene()
 				endif
 				gameInfos.allEvents = getAllEvents()
 				aux = 0
@@ -398,7 +427,11 @@ function archive (typeIndex as integer, info as String[])
 		endcase
 		
 		case 7
-			WriteLine(file, info[0])
+			WriteLine(file, "Deceased: " + info[0])
+		endcase
+		
+		case 8
+			WriteLine(file, "Changed scene to " + info[0] + ".")
 		endcase
 		
 	endselect
@@ -552,13 +585,16 @@ function copyArchive ()
 	
 endfunction
 
-function printMenu (currentPlayer as playerStatus)
+function printMenu (currentPlayer as playerStatus, currentScene as integer)
 	name = CreateText("Name: " + currentPlayer.name)
 	SetTextSize(name, 20)
 	SetTextPosition(name, 0, 0)
 	HP = CreateText("HP: " + Str(currentPlayer.remainingHP))
 	SetTextSize(HP, 20)
 	SetTextPosition(HP, 300, 0)
+	scene = CreateText("Scene: " + Str(currentScene))
+	SetTextSize(scene, 20)
+	SetTextPosition(scene, 300, 20)
 	
 	aux as itemStatus[]
 	aux = getCharacterItems()
@@ -573,8 +609,7 @@ function printMenu (currentPlayer as playerStatus)
 	
 endfunction
 
-function combatFunction (player as playerStatus, enemies as enemyStatus[])
-	
+function combatFunction (player as playerStatus, enemies as enemyStatus[])	
 	flag = 0
 	
 	turn = Random(0, 1)
@@ -693,8 +728,7 @@ function combatFunction (player as playerStatus, enemies as enemyStatus[])
 				next k
 				
 				temp.insert("Player")
-				dPlayer = getCharacterDamageDealt()
-				temp.insert(Str(dPlayer))
+				temp.insert(Str(player.attackValue.damage * player.modifier))
 				archive(6, temp)
 				temp.remove()
 				temp.remove()
@@ -768,6 +802,11 @@ function combatFunction (player as playerStatus, enemies as enemyStatus[])
 				for k = 0 to enemies.length
 					if not enemies[k].remainingHP > 0
 						aux = aux + 1
+						
+						temp.insert("The " + enemies[k].name + " [index: " + Str(enemies[k].index) + "] has died.")
+						archive(7, temp)
+						temp.remove()
+						
 					endif
 				next k
 				

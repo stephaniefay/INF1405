@@ -95,3 +95,7 @@ endfunction enemyLst[index]
 function getRandomEnemy ()
 	randomIndex = Random(0, lastIndexEnemy-1)
 endfunction randomIndex
+
+function insertEventIndexesEnemy (index as integer, lst as integer[])
+	enemyLst[index].eventsIndex = lst
+endfunction

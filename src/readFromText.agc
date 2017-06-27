@@ -112,6 +112,11 @@ function getInfo ()
 				damageItem = Val(ReadLine(file))
 				descItem = ReadLine(file)
 				indexEventItem = Val(ReadLine(file))
+				
+				while eventHolderItem.length > -1
+					eventHolderItem.remove()
+				endwhile
+				
 				if indexEventItem > -1
 					eventHolderItem.insert(getEvent(indexEventItem-1))
 				endif
@@ -140,11 +145,9 @@ function getInfo ()
 				canAppearScene as integer[]
 				eventAux as String[]
 				
-				optionsAux = options.length
-				
-				for k = 0 to optionsAux
+				while options.length > -1
 					options.remove()
-				next k
+				endwhile
 				
 				qtdItem = Val(ReadLine(file))
 				desc = ReadLine(file)
@@ -219,6 +222,10 @@ function getInfo ()
 					modifierEnemy = Val(ReadLine(file))
 					indexEventEnemy = Val(ReadLine(file))
 					
+					while eventHolder.length > -1
+						eventHolder.remove()
+					endwhile
+					
 					if indexEventEnemy > -1
 						eventHolder.insert(getEvent(indexEventEnemy-1))
 					endif
@@ -228,11 +235,19 @@ function getInfo ()
 					
 					count2 = Val(ReadLine(file))-1
 					
+					while attacksDescEnemy.length > -1
+						attacksDescEnemy.remove()
+					endwhile
+					
 					for k = 0 to count2
 						attacksDescEnemy.insert(createAttack(Val(ReadLine(file)),ReadLine(file)))
 					next k
 
 					count2 = Val(ReadLine(file))-1
+					
+					while talksListEnemy.length > -1
+						talksListEnemy.remove()
+					endwhile
 					
 					for k = 0 to count2
 						talksListEnemy.insert(ReadLine(file))
@@ -264,3 +279,299 @@ function getInfo ()
 	completeGame.allPlayers = charactersSelectLst
 
 endfunction completeGame
+
+function ChooseFile()
+	
+	gameInfos as gameStructure
+	
+	ret$ = ChooseRawFile("*.txt")
+	if ret$=""
+		exitfunction gameInfos
+	else
+		file = OpenToRead("saves\" + ret$)
+
+		players as playerStatus[]
+		tempIndexes1 as integer[]
+		tempIndexes2 as integer[]
+		
+		r$ = ""
+		k = 0
+		while not r$ = "=============================================="
+			
+			hpCharacter as integer
+			nameCharacter as String
+			descCharacter as String
+			modCharacter as integer
+			attackValueCharacter as integer
+			attackNameCharacter as String
+			deffenseCharacter as integer
+			itemsCharacter as itemStatus[]
+			abilityCharacter as abilityStatus[]
+			
+			if r$ = ""
+				hpCharacter = Val(ReadLine(file))
+			else
+				hpCharacter = Val(r$)
+			endif
+			
+			while tempIndexes1.length > -1
+				tempIndexes1.remove()
+			endwhile
+			
+			temp$ = ReadLine(file)
+			while FindString(temp$, "item:") > 0
+				temp$ = StripString(temp$, "item: ")
+				tempIndexes1.insert(Val(temp$))
+				temp$ = ReadLine(file)
+			endwhile
+			
+			while tempIndexes2.length > -1
+				tempIndexes2.remove()
+			endwhile
+			
+			while FindString(temp$, "ability:") > 0
+				temp$ = StripString(temp$, "ability: ")
+				tempIndexes2.insert(Val(temp$))
+				temp$ = ReadLine(file)
+			endwhile
+			
+			nameCharacter = temp$
+			descCharacter = ReadLine(file)
+			modCharacter = Val(ReadLine(file))
+			attackValueCharacter = Val(ReadLine(file))
+			attackNameCharacter = ReadLine(file)
+			deffenseCharacter = Val(ReadLine(file))
+			
+			players.insert(createPlayer(hpCharacter, itemsCharacter, abilityCharacter, nameCharacter, descCharacter, createAttack(attackValueCharacter, attackNameCharacter), modCharacter, deffenseCharacter))
+			players[k].abilitiesIndex = tempIndexes2
+			players[k].itemsIndex = tempIndexes1
+			k = k + 1
+			
+			r$ = ReadLine(file)
+			
+		endwhile
+		
+		r$ = ""
+		while not r$ = "=============================================="
+			 
+			 nameAbility as String
+			 hpAbility as integer
+			 deffenseAbility as integer
+			 attackAbility as integer
+			 modAbility as integer
+			 descAbility as String
+			 indexAbility as integer
+			 
+			 if r$ = ""
+				nameAbility = ReadLine(file)
+			 else
+				nameAbility = r$
+			 endif
+			 
+			 hpAbility = Val(ReadLine(file))
+			 deffenseAbility = Val(ReadLine(file))
+			 attackAbility = Val(ReadLine(file))
+			 modAbility = Val(ReadLine(file))
+			 descAbility = ReadLine(file)
+			 indexAbility = Val(ReadLine(file))
+			 
+			 createAbility(nameAbility, hpAbility, deffenseAbility, attackAbility, modAbility, descAbility)
+			 r$ = ReadLine(file)
+			 
+		endwhile
+			
+		r$ = ""
+		while not r$ = "=============================================="
+			
+			nameItem as String
+			abilityIndexItem as integer
+			damageItem as integer
+			descItem as String
+			eventHolderItem as eventStatus[]
+			indexItem as integer
+
+			if r$ = ""
+				nameItem = ReadLine(file)
+			else
+				nameItem = r$
+			endif
+
+			nameItem = ReadLine(file)
+			abilityIndexItem = Val(ReadLine(file))
+			damageItem = Val(ReadLine(file))
+			descItem = ReadLine(file)
+			
+			while tempIndexes1.length > -1
+				tempIndexes1.remove()
+			endwhile
+			
+			temp$ = ReadLine(file)
+			while FindString(temp$, "event:") > 0
+				temp$ = StripString(temp$, "event: ")
+				tempIndexes1.insert(Val(temp$))
+				temp$ = ReadLine(file)
+			endwhile
+			
+			indexItem = Val(temp$)
+			
+			createItem(nameItem, getAbility(abilityIndexItem), damageItem, descAbility, eventHolderItem)
+			insertItemLstofIndexes(indexItem, tempIndexes1)
+			r$ = ReadLine(file)
+			
+		endwhile
+		
+		r$ = ""
+		while not r$ = "=============================================="
+			
+			auxEvent as String[]
+			itemsEvent as itemStatus[]
+			descEvent as String
+			optionsEvent as String[]
+			enemiesEvent as enemyStatus[]
+			scenesEvent as integer[]
+			indexEvent as integer
+			
+			while auxEvent.length > -1
+				auxEvent.remove()
+			endwhile
+			
+			if r$ = ""
+				temp$ = ReadLine(file)
+			else
+				temp$ = r$
+			endif
+			
+			auxEvent.insert(mid(temp$,1, 1))
+			auxEvent.insert(mid(temp$,3, 1))
+			
+			while tempIndexes1.length > -1
+				tempIndexes1.remove()
+			endwhile
+			
+			temp$ = ReadLine(file)
+			while FindString(temp$, "item:") > 0
+				temp$ = StripString(temp$, "item: ")
+				tempIndexes1.insert(Val(temp$))
+				temp$ = ReadLine(file)	
+			endwhile
+		
+			descEvent = temp$
+			
+			while optionsEvent.length > -1
+				optionsEvent.remove()
+			endwhile
+			
+			temp$ = ReadLine(file)
+			while FindString(temp$, "answer:") > 0
+				temp$ = StripString(temp$, "answer: ")
+				optionsEvent.insert(temp$)
+				temp$ = ReadLine(file)
+			endwhile
+			
+			while tempIndexes2.length > -1
+				tempIndexes2.remove()
+			endwhile
+			
+			while FindString(temp$, "enemy:") > 0
+				temp$ = StripString(temp$, "enemy: ")
+				tempIndexes2.insert(Val(temp$))
+				temp$ = ReadLine(file)
+			endwhile
+				
+			while scenesEvent.length > -1
+				scenesEvent.remove()
+			endwhile
+				
+			while FindString(temp$, "scene:") > 0
+				temp$ = StripString(temp$, "scene: ")
+				scenesEvent.insert(Val(temp$))
+				temp$ = ReadLine(file)
+			endwhile
+			
+			indexEvent = Val(temp$)
+			
+			createEvent(auxEvent, tempIndexes1.length, itemsEvent, descEvent, optionsEvent, tempIndexes2.length, enemiesEvent, scenesEvent)
+			insertEventIndexes(indexEvent, tempIndexes1, tempIndexes2)
+			r$ = ReadLine(file)
+			
+		endwhile
+		
+		r$ = ""
+		while not r$ = "=============================================="
+			
+			scenesEnemy as integer[]
+			hpEnemy as integer
+			modEnemy as integer
+			eventsEnemy as eventStatus[]
+			nameEnemy as String
+			descEnemy as String
+			attacksEnemy as attackStatus[]
+			talksEnemy as String[]
+			deffenseEnemy as integer
+			indexEnemy as integer
+
+			while scenesEnemy.length > -1
+				scenesEnemy.remove()
+			endwhile
+			
+			if r$ = ""
+				temp$ = ReadLine(file)
+			else
+				temp$ = r$
+			endif
+			
+			while FindString(temp$, "scene:") > 0
+				temp$ = StripString(temp$, "scene: ")
+				scenesEnemy.insert(Val(temp$))
+				temp$ = ReadLine(file)
+			endwhile
+			
+			hpEnemy = Val(temp$)
+			modEnemy = Val(ReadLine(file))
+			
+			while tempIndexes1.length > -1
+				tempIndexes1.remove()
+			endwhile
+			
+			temp$ = ReadLine(file)
+			while FindString(temp$, "event:") > 0
+				temp$ = StripString(temp$, "event: ")
+				tempIndexes1.insert(Val(temp$))
+				temp$ = ReadLine(file)
+			endwhile
+			
+			nameEnemy = temp$
+			descEnemy = ReadLine(file)
+			
+			while attacksEnemy.length > -1
+				attacksEnemy.remove()
+			endwhile
+			
+			temp$ = ReadLine(file)
+			while FindString(temp$, "attack:") > 0
+				temp$ = StripString(temp$, "attack: ")
+				attacksEnemy.insert(createAttack(Val(temp$), ReadLine(file)))
+				temp$ = ReadLine(file)
+			endwhile
+		
+			while talksEnemy.length > -1
+				talksEnemy.remove()
+			endwhile
+			
+			while FindString(temp$, "talks:") > 0
+				temp$ = StripString(temp$, "talks: ")
+				talksEnemy.insert(temp$)
+				temp$ = ReadLine(file)
+			endwhile
+		
+			deffenseEnemy = Val(temp$)
+			indexEnemy = Val(ReadLine(file))
+
+			createEnemy(scenesEnemy, hpEnemy, modEnemy, eventsEnemy, nameEnemy, descEnemy, attacksEnemy, talksEnemy, deffenseEnemy)
+			insertEventIndexesEnemy(indexEnemy, tempIndexes1)
+			r$ = ReadLine(file)
+			
+		endwhile
+		
+	endif
+endfunction gameInfos

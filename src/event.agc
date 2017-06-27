@@ -187,5 +187,10 @@ function updateEventsByScene ()
 	organizeEventByScene()
 endfunction
 	
+function insertEventIndexes (index as integer, items as integer[], enemies as integer[])
 	
+	eventLst[index].enemiesIndex = enemies
+	eventLst[index].itemsIndex = items
+
+endfunction
 	

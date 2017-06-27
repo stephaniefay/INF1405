@@ -109,11 +109,14 @@ AddSpriteAnimationFrame ( spriteStarExit, LoadImageResized("startMenu\star\star_
 AddSpriteAnimationFrame ( spriteStarExit, LoadImageResized("startMenu\star\star_right (3).gif", 0.3, 0.3, 0) )
 AddSpriteAnimationFrame ( spriteStarExit, LoadImageResized("startMenu\star\star_right (4).gif", 0.3, 0.3, 0) )
 
+hasLoadFile = 0
+
 do
 	if (GetFileExists("saves\mostRecent.txt") = 0)
 		SetTextColor(loadStr, 111, 113, 117, 255)
 		SetSpritePosition(spriteStarLoad, -100, -100)
 	else
+		hasLoadFile = 1
 		if (GetTextHitTest(loadStr, GetPointerX(), GetPointerY()) = 1)
 			if (GetSpritePlaying(spriteStarLoad) = 0)
 				playSprite(spriteStarLoad)
@@ -150,6 +153,7 @@ do
 
 	if ( GetPointerPressed ( ) = 1 )
 		hitPlay = GetTextHitTest (playStr, GetPointerX ( ), GetPointerY ( ) )
+		hitload = GetTextHitTest (loadStr, GetPointerx ( ), GetPointerY ( ) )
 		hitExit = GetTextHitTest (exitStr, GetPointerX ( ), GetPointerY ( ) )
 
 		if (hitPlay = 1)
@@ -159,6 +163,15 @@ do
 			DeleteSprite(spriteStarLoad)
 			DeleteAllText()
 			start()
+		endif
+		
+		if (hitload = 1 and hasLoadFile = 1)
+			DeleteSprite(spriteBackground)
+			DeleteSprite(spriteStarExit)
+			DeleteSprite(spriteStarPlay)
+			DeleteSprite(spriteStarLoad)
+			DeleteAllText()
+			load()
 		endif
 
 		if (hitExit = 1)

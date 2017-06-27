@@ -51,3 +51,9 @@ endfunction newItem.desc
 
 function getItemIndexByItem (newItem as itemStatus)
 endfunction newItem.index
+
+function insertItemLstofIndexes (index as integer, lst as integer[])
+
+	itemLst[index].eventsIndex = lst
+
+endfunction

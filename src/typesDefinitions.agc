@@ -25,6 +25,10 @@ Type playerStatus
 	
 	deffense as integer
 	
+	itemsIndex as integer[]
+	
+	abilitiesIndex as integer[]
+	
 endType
 
 Type abilityStatus
@@ -65,6 +69,10 @@ Type eventStatus
 	
 	index as integer
 	
+	itemsIndex as integer[]
+	
+	enemiesIndex as integer[]
+	
 endType
 
 Type itemStatus
@@ -80,6 +88,8 @@ Type itemStatus
 	eventHolder as eventStatus[]
 	
 	index as integer
+	
+	eventsIndex as integer[]
 	
 endType
 
@@ -106,6 +116,8 @@ Type enemyStatus
 	deffense as integer
 	
 	index as integer
+	
+	eventsIndex as integer[]
 	
 endType
 

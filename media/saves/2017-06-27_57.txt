@@ -32,143 +32,127 @@ Nome do Item Teste 1
 0
 2
 Descrição do item teste
-0
+event: 0
 0
 Nome do Item Teste 2
 0
 2
 Descrição do item teste
-0
-0
+event: 0
 1
 Nome do Item Teste 3
 0
 2
 Descrição do item teste
-0
-0
-0
+event: 0
 2
 Nome do Item Teste 4
 0
 2
 Descrição do item teste
-0
-0
-0
-0
+event: 0
 3
 ==============================================
 1 3
-1
-0
+item: 0
 Descrição do evento teste1
-Opção 1
-Pegar os Itens
-Opção 3
-Iniciar Combate
-2
-0
-0
-1
-2
+answer: Opção 1
+answer: Pegar os Itens
+answer: Opção 3
+answer: Iniciar Combate
+enemy: 0
+enemy: 0
+scene: 1
+scene: 2
 0
 0 1
-1
-2
+item: 3
 Descrição do evento teste2
-Pegar os Itens
-Iniciar Combate
-Opção 3
-Opção 4
-3
-0
-0
-1
-1
-2
-3
+answer: Pegar os Itens
+answer: Iniciar Combate
+answer: Opção 3
+answer: Opção 4
+enemy: 0
+enemy: 1
+enemy: 1
+scene: 1
+scene: 2
+scene: 3
 1
 0 1
-1
-3
+item: 1
 Descrição do evento teste3
-Pegar os Itens
-Iniciar Combate
-Opção 3
-Opção 4
-3
-1
-0
-0
-2
-3
+answer: Pegar os Itens
+answer: Iniciar Combate
+answer: Opção 3
+answer: Opção 4
+enemy: 1
+enemy: 1
+enemy: 0
+scene: 2
+scene: 3
 2
 0 1
-1
-3
+item: 3
 Descrição do evento teste4
-Pegar os Itens
-Iniciar Combate
-Opção 3
-Opção 4
-3
-1
-1
-1
-2
-3
+answer: Pegar os Itens
+answer: Iniciar Combate
+answer: Opção 3
+answer: Opção 4
+enemy: 0
+enemy: 1
+enemy: 1
+scene: 2
+scene: 3
 3
 0 1
-1
-3
+item: 0
 Descrição do evento teste5
-Pegar os Itens
-Iniciar Combate
-Opção 3
-Opção 4
-3
-1
-0
-0
-2
-1
+answer: Pegar os Itens
+answer: Iniciar Combate
+answer: Opção 3
+answer: Opção 4
+enemy: 1
+enemy: 1
+enemy: 0
+scene: 2
+scene: 1
 4
 ==============================================
-1
-2
-3
+scene: 1
+scene: 2
+scene: 3
 10
 1
 Nome do Inimigo Teste
 Descrição do Inimigo teste
-10
+attack: 10
 Ataque 1
-20
+attack: 20
 Ataque 2
-Fala 1
-Fala 2
+talks: Fala 1
+talks: Fala 2
 10
 0
-1
-2
-3
+scene: 1
+scene: 2
+scene: 3
 20
 1
 Nome do Inimigo Teste
 Descrição do Inimigo teste
-10
+attack: 10
 Ataque 1
-20
+attack: 20
 Ataque 2
-10
+attack: 10
 Ataque 1
-20
+attack: 20
 Ataque 2
-Fala 1
-Fala 2
-Fala 1
-Fala 2
+talks: Fala 1
+talks: Fala 2
+talks: Fala 1
+talks: Fala 2
 10
 1
 ==============================================
@@ -183,23 +167,31 @@ Nome do Ataque Teste do Personagem
 1
 5
 ==============================================
+Event: Descrição do evento teste1 - 0
+==============================================
+Answer: Opção 1
+==============================================
 Event: Descrição do evento teste5 - 4
 ==============================================
-Answer: Opção 3
+Answer: Pegar os Itens
+==============================================
+Include item (Nome do Item Teste 1 - Descrição do item teste [of index: 0]) for player.
+==============================================
+Changed to next scene.
 ==============================================
 Event: Descrição do evento teste2 - 1
 ==============================================
-Answer: Opção 3
+Answer: Pegar os Itens
+==============================================
+Include item (Nome do Item Teste 4 - Descrição do item teste [of index: 3]) for player.
 ==============================================
 Event: Descrição do evento teste4 - 3
 ==============================================
-Answer: Opção 4
-==============================================
-Event: Descrição do evento teste1 - 0
-==============================================
 Answer: Opção 3
 ==============================================
-Event: Descrição do evento teste3 - 2
+Changed to next scene.
+==============================================
+Event: Descrição do evento teste2 - 1
 ==============================================
 Answer: Opção 3
 

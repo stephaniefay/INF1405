@@ -440,11 +440,11 @@ function inicializeArchive (info as gameStructure)
 		WriteLine(fileTemp, Str(info.allPlayers[i].absoluteHP))
 
 		for j = 0 to info.allPlayers[i].itemList.length
-			WriteLine(fileTemp, Str(info.allPlayers[i].itemList[j].index))
+			WriteLine(fileTemp, "item: " + Str(info.allPlayers[i].itemList[j].index))
 		next j
 		
 		for j = 0 to info.allPlayers[i].abilityList.length
-			WriteLine(fileTemp, Str(info.allPlayers[i].abilityList[i].index))
+			WriteLine(fileTemp, "ability: " + Str(info.allPlayers[i].abilityList[i].index))
 		next j
 		
 		WriteLine(fileTemp, info.allPlayers[i].name)
@@ -480,7 +480,7 @@ function inicializeArchive (info as gameStructure)
 		WriteLine(fileTemp, info.allItems[i].desc)
 		
 		for j = 0 to info.allItems[i].eventHolder.length
-			WriteLine(fileTemp, Str(info.allItems[i].eventHolder[j].index))
+			WriteLine(fileTemp, "event: " + Str(info.allItems[i].eventHolder[j].index))
 		next j
 		
 		WriteLine(fileTemp, Str(info.allItems[i].index))
@@ -494,26 +494,22 @@ function inicializeArchive (info as gameStructure)
 		temp$ = info.allEvents[i].eventAux[0] + " " + info.allEvents[i].eventAux[1]
 		WriteLine(filetemp, temp$)
 
-		WriteLine(fileTemp, Str(info.allEvents[i].itemQtd))
-		
 		for j = 0 to info.allEvents[i].itemList.length
-			WriteLine(fileTemp, Str(info.allEvents[i].itemList[j].index))
+			WriteLine(fileTemp, "item: " + Str(info.allEvents[i].itemList[j].index))
 		next j
 		
 		WriteLine(fileTemp, info.allEvents[i].desc)
 		
 		for j = 0 to info.allEvents[i].options.length
-			WriteLine(fileTemp, info.allEvents[i].options[j])
+			WriteLine(fileTemp, "answer: " + info.allEvents[i].options[j])
 		next j
-		
-		WriteLine(fileTemp, Str(info.allEvents[i].enemyQtd))
-		
+				
 		for j = 0 to info.allEvents[i].enemyHolder.length
-			WriteLine(fileTemp, Str(info.allEvents[i].enemyHolder[j].index))
+			WriteLine(fileTemp, "enemy: " + Str(info.allEvents[i].enemyHolder[j].index))
 		next j
 		
 		for j = 0 to info.allEvents[i].canAppearScene.length
-			WriteLine(fileTemp, Str(info.allEvents[i].canAppearScene[j]))
+			WriteLine(fileTemp, "scene: " + Str(info.allEvents[i].canAppearScene[j]))
 		next j
 		
 		WriteLine(fileTemp, Str(info.allEvents[i].index))
@@ -525,26 +521,26 @@ function inicializeArchive (info as gameStructure)
 	for i =  0 to info.allEnemies.length
 		
 		for j = 0 to info.allEnemies[i].typeScene.length
-			WriteLine(fileTemp, Str(info.allEnemies[i].typeScene[j]))
+			WriteLine(fileTemp, "scene: " + Str(info.allEnemies[i].typeScene[j]))
 		next j
 		
 		WriteLine(fileTemp, Str(info.allEnemies[i].absoluteHP))
 		WriteLine(fileTemp, Str(info.allEnemies[i].modifier))
 		
 		for j = 0 to info.allEnemies[i].eventHolder.length
-			WriteLine(fileTemp, Str(info.allEnemies[i].eventHolder[j].index))
+			WriteLine(fileTemp, "event: " + Str(info.allEnemies[i].eventHolder[j].index))
 		next j
 		
 		WriteLine(fileTemp, info.allEnemies[i].name)
 		WriteLine(fileTemp, info.allEnemies[i].desc)
 		
 		for j = 0 to info.allEnemies[i].attacksDesc.length
-			WriteLine(fileTemp, Str(info.allEnemies[i].attacksDesc[j].damage))
+			WriteLine(fileTemp, "attack: " + Str(info.allEnemies[i].attacksDesc[j].damage))
 			WriteLine(fileTemp, info.allEnemies[i].attacksDesc[j].name)
 		next j
 		
 		for j = 0 to info.allEnemies[i].talksList.length
-			WriteLine(fileTemp, info.allEnemies[i].talksList[j])
+			WriteLine(fileTemp, "talks: " + info.allEnemies[i].talksList[j])
 		next j
 		
 		WriteLine(fileTemp, Str(info.allEnemies[i].deffense))
@@ -880,5 +876,13 @@ function combatFunction (player as playerStatus, enemies as enemyStatus[])
 endfunction player
 
 function load ()
+	
+	historyInfo as gameStructure
+	historyInfo = ChooseFile()
+	
+	do
+		//print(ret$)
+		Sync()
+	loop
 	
 endfunction

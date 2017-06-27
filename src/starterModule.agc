@@ -237,10 +237,7 @@ function gameSequence (gameInfos as gameStructure)
 			if countdown = 0
 				currentScene = currentScene + 1
 				countdown = 2
-			endif
-			
-			if currentScene = 2 and countdown = 1
-				print("wow")
+				archive(8, temp)
 			endif
 			
 			if currentScene < 4
@@ -263,20 +260,14 @@ function gameSequence (gameInfos as gameStructure)
 		endcase
 		case 1
 			if gameInfos.allEvents.length = -1 or currentScene = 4
-				print("Game Over")
-				
 				if GetFileExists("raw:" + GetDocumentsPath() + "\A New Adventure\media\saves\mostRecent.txt") = 1
 					copyArchive()		
 				endif
 				
-				if (attention = 1 and GetPointerState() = 1)
-					end
-				endif
-				
-				if GetPointerState() = 0
-					attention = 1
+				if gameInfos.currentPlayer.remainingHP <= 0
+					printGameOver(gameInfos.currentPlayer, 0)
 				else
-					attention = 0
+					printGameOver(gameInfos.currentPlayer, 1)
 				endif
 			
 			else	
@@ -431,7 +422,7 @@ function archive (typeIndex as integer, info as String[])
 		endcase
 		
 		case 8
-			WriteLine(file, "Changed scene to " + info[0] + ".")
+			WriteLine(file, "Changed to next scene.")
 		endcase
 		
 	endselect
@@ -606,6 +597,52 @@ function printMenu (currentPlayer as playerStatus, currentScene as integer)
 		SetTextPosition(24+k, 800, 1 * (k*10))
 	next k
 	
+	
+endfunction
+
+function printGameOver (player as playerStatus, flag as integer)
+
+	attention = 0
+
+	do
+		if flag = 0
+			Print("You died. Your final status are:")		
+		else
+			Print("You won! Your final status are:")
+		endif
+		
+		Print(player.name + ", HP: " + Str(player.remainingHP) + "/" + Str(player.absoluteHP))
+		Print("Deffense: " + Str(player.deffense) + "; Attack: " + Str(player.attackValue.damage) + "*" + Str(player.modifier) + " (" + player.attackValue.name + ")")
+		Print("Abilities:")
+		
+		auxAbility as abilityStatus[]
+		auxAbility = getCharacterAbilities()
+		
+		for k = 0 to auxAbility.length
+			print(getAbilityName(auxAbility[k]))
+		next k
+
+		Print("Items:")
+		
+		auxItem as itemStatus[]
+		auxItem = getCharacterItems()
+		
+		for k = 0 to auxItem.length
+			print(getItemName(auxItem[k].index))
+		next k
+		
+		if (attention = 1 and GetPointerState() = 1)
+			end
+		endif
+		
+		if GetPointerState() = 0
+			attention = 1
+		else
+			attention = 0
+		endif
+
+		Sync()
+	loop
 	
 endfunction
 
@@ -841,3 +878,7 @@ function combatFunction (player as playerStatus, enemies as enemyStatus[])
 	DeleteAllText()
 	
 endfunction player
+
+function load ()
+	
+endfunction

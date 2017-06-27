@@ -71,6 +71,10 @@ function getCharacterItems ()
 
 endfunction player.itemList
 
+function getCharacterAbilities ()
+
+endfunction player.abilityList
+
 //update info 
 
 function updateCharacterHP (newHP as integer)
@@ -129,6 +133,7 @@ function updateCharacterItem (newItem as itemStatus)
 	next i
 
 	updateCharacterHP(newItem.damage)
+	updateCharacterAbility(newItem.ability)
 	player.itemList.insert(newItem)
 
 endfunction	

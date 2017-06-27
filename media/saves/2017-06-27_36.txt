@@ -61,7 +61,7 @@ Descrição do item teste
 ==============================================
 1 3
 1
-2
+1
 Descrição do evento teste1
 Opção 1
 Pegar os Itens
@@ -82,16 +82,16 @@ Iniciar Combate
 Opção 3
 Opção 4
 3
-0
-0
 1
+1
+0
 1
 2
 3
 1
 0 1
 1
-2
+3
 Descrição do evento teste3
 Pegar os Itens
 Iniciar Combate
@@ -106,7 +106,7 @@ Opção 4
 2
 0 1
 1
-0
+1
 Descrição do evento teste4
 Pegar os Itens
 Iniciar Combate
@@ -121,7 +121,7 @@ Opção 4
 3
 0 1
 1
-2
+3
 Descrição do evento teste5
 Pegar os Itens
 Iniciar Combate
@@ -129,7 +129,7 @@ Opção 3
 Opção 4
 3
 0
-0
+1
 0
 2
 1
@@ -183,52 +183,37 @@ Nome do Ataque Teste do Personagem
 1
 5
 ==============================================
-Event: Descrição do evento teste5 - 4
-==============================================
-Answer: Iniciar Combate
-==============================================
-Battle: Enemies (Nome do Inimigo Teste, Nome do Inimigo Teste, Nome do Inimigo Teste [of indexes: 0, 0, 0]), first turn for: Player.
-==============================================
-Battle Damage: Player attacks with 10 of damage.
-==============================================
 Event: Descrição do evento teste1 - 0
 ==============================================
-Answer: Iniciar Combate
+Answer: Pegar os Itens
 ==============================================
-Battle: Enemies (Nome do Inimigo Teste, Nome do Inimigo Teste [of indexes: 1, 0]), first turn for: Player.
+Include item (Nome do Item Teste 2 - Descrição do item teste [of index: 1]) for player.
 ==============================================
-Battle Damage: Player attacks with 10 of damage.
+Event: Descrição do evento teste2 - 1
 ==============================================
-Battle Damage: Nome do Inimigo Teste [index: 1] attacks with 10 of damage.
+Answer: Pegar os Itens
 ==============================================
-Deceased: The Nome do Inimigo Teste [index: 0] has died.
-==============================================
-Battle Damage: Nome do Inimigo Teste [index: 0] attacks with 10 of damage.
-==============================================
-Deceased: The Nome do Inimigo Teste [index: 0] has died.
-==============================================
-Battle Damage: Player attacks with 10 of damage.
+Include item (Nome do Item Teste 3 - Descrição do item teste [of index: 2]) for player.
 ==============================================
 Changed to next scene.
 ==============================================
-Event: Descrição do evento teste4 - 3
+Event: Descrição do evento teste2 - 1
 ==============================================
-Answer: Iniciar Combate
+Answer: Pegar os Itens
 ==============================================
-Battle: Enemies (Nome do Inimigo Teste, Nome do Inimigo Teste, Nome do Inimigo Teste [of indexes: 0, 1, 0]), first turn for: Enemies.
+Include item (Nome do Item Teste 3 - Descrição do item teste [of index: 2]) for player.
 ==============================================
-Battle Damage: Nome do Inimigo Teste [index: 0] attacks with 10 of damage.
+Event: Descrição do evento teste2 - 1
 ==============================================
-Battle Damage: Nome do Inimigo Teste [index: 1] attacks with 10 of damage.
+Answer: Pegar os Itens
 ==============================================
-Battle Damage: Nome do Inimigo Teste [index: 0] attacks with 10 of damage.
+Include item (Nome do Item Teste 3 - Descrição do item teste [of index: 2]) for player.
 ==============================================
-Battle Damage: Player attacks with 10 of damage.
+Changed to next scene.
 ==============================================
-Battle Damage: Nome do Inimigo Teste [index: 1] attacks with 20 of damage.
+Event: Descrição do evento teste2 - 1
 ==============================================
-Deceased: The Nome do Inimigo Teste [index: 0] has died.
+Answer: Pegar os Itens
 ==============================================
-Deceased: The Nome do Inimigo Teste [index: 0] has died.
-==============================================
-Deceased: The player has died.
+Include item (Nome do Item Teste 3 - Descrição do item teste [of index: 2]) for player.
+

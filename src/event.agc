@@ -48,7 +48,13 @@ function updateAllEnemiesEvent()
 endfunction
 
 function getEventItems (index as integer)
-endfunction eventLst[index].itemList
+	error as itemStatus[]
+	for newIndex = 0 to eventLst.length
+		if eventLst[newIndex].index = index
+			exitfunction eventLst[newIndex].itemList
+		endif
+	next newIndex
+endfunction error
 
 function getEventDesc (index as integer)
 	for newIndex = 0 to eventLst.length

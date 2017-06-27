@@ -553,20 +553,8 @@ function combatFunction (player as playerStatus, enemies as enemyStatus[])
 	
 	turn = Random(0, 1)
 	
-	while ( player.remainingHP > 0 and flag < 1 )
+	while ( flag < 1 )
 		DeleteAllText()
-		
-		aux = -1
-		
-		for k = 0 to enemies.length
-			if enemies[k].remainingHP = 0
-				aux = aux + 1
-			endif
-		next k
-		
-		if aux = enemies.length
-			flag = 1
-		endif
 		
 		//player
 		namePlayer = CreateText(player.name)
@@ -591,9 +579,28 @@ function combatFunction (player as playerStatus, enemies as enemyStatus[])
 		SetTextSize(modifierPlayer, 40)
 		SetTextPosition(modifierPlayer, 0, 240)
 		
-		attack = CreateText ( "Atacar!" )
-		SetTextSize(attack, 45)
-		SetTextPosition(attack, 20, 280)
+		if turn = 0
+		
+			attack = CreateText ( "Atacar!" )
+			SetTextSize(attack, 45)
+			SetTextPosition(attack, 20, 280)
+		
+		else
+			
+			if turn = 1
+						
+				nextturn = CreateText ( "Próximo Turno" )
+				SetTextSize(nextturn, 45)
+				SetTextPosition(nextturn, 20, 280)
+
+			else
+				
+				endbattle = CreateText( "Finalizar Combate" )
+				SetTextSize(endbattle, 45)
+				SetTextPosition(endbattle, 20, 280)
+				
+			endif
+		endif
 		
 		//enemies
 		for k = 0 to enemies.length
@@ -616,12 +623,11 @@ function combatFunction (player as playerStatus, enemies as enemyStatus[])
 			
 		next k
 		
-		k = 0
+		Sync()
 		
 		select turn
 				
 			case 0 //player
-				
 				
 				while attention = 0
 					
@@ -633,40 +639,93 @@ function combatFunction (player as playerStatus, enemies as enemyStatus[])
 					
 				endwhile
 				
-				k = 0
+				for k = 0 to enemies.length
+					enemies[k] = getEnemyDamageTaken(enemies[k], getCharacterDamageDealt())
+				next k
+
+				counter = 0
 				turn = 1
 				attention = 0
+				
+				if not player.remainingHP > 0
+					turn = 2
+				endif
+				
+				aux = -1
+		
+				for k = 0 to enemies.length
+					if not enemies[k].remainingHP > 0
+						aux = aux + 1
+					endif
+				next k
+				
+				if aux = enemies.length
+					turn = 2
+				endif
 						
 			endcase
 			
 			case 1 // enemies
-				
-				aux = getEnemyDamageDone(k)
-				player = updateCharacterDamageTaken(player, aux)
 
-				if attention = 1
-					if GetPointerPressed() = 1
-						if k < enemies.length
-							k = k + 1
-						else
-							turn = 0
-						endif
-					endif
-				endif
+				while enemies[counter].remainingHP = 0 and counter < enemies.length
+					counter = counter + 1
+				endwhile
+
+				aux = getEnemyDamageDone(enemies[counter].index)
+				player = updateCharacterDamageTaken(player, aux)
+				attention = 0
 
 				while attention = 0
 					
-					if GetPointerPressed() = 1
+					if GetTextHitTest(nextturn, GetPointerX(), GetPointerY()) and GetPointerPressed() = 1
 						attention = 1
-						
-					else
-						attention = 0
-
 					endif
 					
 					Sync()
+					
+				endwhile
 
-				endwhile 
+
+				if attention = 1
+					if counter < enemies.length
+						counter = counter + 1
+					else
+						attention = 0
+						turn = 0
+					endif
+				endif
+				
+				if not player.remainingHP > 0
+					turn = 2
+				endif
+				
+				aux = -1
+		
+				for k = 0 to enemies.length
+					if not enemies[k].remainingHP > 0
+						aux = aux + 1
+					endif
+				next k
+				
+				if aux = enemies.length
+					turn = 2
+				endif
+				
+			endcase
+			
+			case 2
+				
+				while attention = 0
+					
+					if GetTextHitTest(endbattle, GetPointerX(), GetPointerY()) and GetPointerPressed() = 1
+						attention = 1
+					endif
+					
+					Sync()
+					
+				endwhile
+				
+				flag = 1
 				
 			endcase
 		
@@ -675,5 +734,7 @@ function combatFunction (player as playerStatus, enemies as enemyStatus[])
 		Sync()
 		
 	endwhile
+	
+	DeleteAllText()
 	
 endfunction player

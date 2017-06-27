@@ -68,14 +68,23 @@ endfunction newLst
 
 function getEnemyDamageDone (index as integer)
 	
-	attackIndex = random(0, enemyLst[index].attacksDesc.length-1)
+	size = enemyLst[index].attacksDesc.length
+	size = size - 1
+	
+	attackIndex = random(0, size)
 	damage = enemyLst[index].modifier * getAttackDamage(enemyLst[index].attacksDesc[attackIndex])
 
 endfunction damage
 
-function getEnemyDamageTaken (index as integer, damage as integer)
-	enemyLst[index].remainingHP = enemyLst[index].remainingHP - (enemyLst[index].deffense - damage)
-endfunction
+function getEnemyDamageTaken (enemy as enemyStatus, damage as integer)
+	
+	if damage < enemy.remainingHP
+		enemy.remainingHP = enemy.remainingHP - (enemy.deffense - damage)
+	else
+		enemy.remainingHP = 0
+	endif
+	
+endfunction enemy
 
 function getAllEnemies ()
 endfunction enemyLst
